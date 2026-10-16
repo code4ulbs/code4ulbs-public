@@ -1,0 +1,943 @@
+{
+  "site": {
+    "title": "Code4ULBS — Portofoliu",
+    "tagline": "Soluții digitale pentru Universitatea „Lucian Blaga” din Sibiu, create de voluntari: profesioniști și studenți.",
+    "about": "Code4ULBS este o inițiativă a Universității „Lucian Blaga” din Sibiu (ULBS), realizată în colaborare cu Sibiu IT Cluster. Echipe de studenți și profesioniști din industrie lucrează împreună, ca mentori și colegi, la aplicații reale pentru comunitatea universitară: de la orar și raportarea cercetării până la aplicația mobilă a studenților.",
+    "starter_url": "https://github.com/code4ulbs/code4ulbs-starter",
+    "org_url": "https://github.com/code4ulbs",
+    "cie_url": "https://inginerie.ulbsibiu.ro/dep.cie/pages/code4ulbs"
+  },
+  "ecosystem": [
+    "flowchart LR",
+    "  UMS[(UMS ULBS)] --> P[UMS proxy]",
+    "  P --> PO[Plata cu ora]",
+    "  P --> TL[Teme licență]",
+    "  P --> AD[Adeverințe]",
+    "  SCH[Schedule\\norar + prezență] --> CON[ULBS Connect\\naplicație mobilă]",
+    "  SCH --> PO",
+    "  GR[Gradis]",
+    "  EX[Exams]",
+    "  IN[Internships]"
+  ],
+  "projects": [
+    {
+      "slug": "ulbs-connect",
+      "name": "ULBS Connect",
+      "tagline": "Aplicația mobilă oficială a studenților ULBS",
+      "status": "production",
+      "version": "1.0.x",
+      "url": "https://connect.ulbsibiu.ro",
+      "repos": [
+        {
+          "name": "ulbs-connect-frontend",
+          "private": true
+        },
+        {
+          "name": "ulbs-connect-backend",
+          "private": true
+        }
+      ],
+      "description": "ULBS Connect este aplicația pentru Android, iOS și web prin care studenții află într-un singur loc știrile și evenimentele universității, își consultă orarul, își confirmă prezența la curs prin scanarea unui cod QR și găsesc informații despre campus și cămine. Este publicată în Google Play și App Store.",
+      "features": [
+        "Știri și evenimente preluate automat de pe site-ul universității, cu like și salvare",
+        "Orar după formație de studiu, cadru didactic sau sală, plus examene",
+        "Prezență prin scanare de cod QR și vizualizarea propriei prezențe",
+        "Notificări push trimise din panoul de administrare",
+        "Hartă a campusului și informații despre cămine",
+        "Profil academic sincronizat din sistemul universității"
+      ],
+      "roles": [
+        "Student",
+        "Administrator de conținut (panou web)"
+      ],
+      "integrations": [
+        "Schedule (orar, prezență)",
+        "UMS (profil academic)",
+        "Google (autentificare)",
+        "Site-ul ULBS (știri, evenimente)",
+        "Expo Push (notificări)"
+      ],
+      "auth": "Autentificare cu cont Google @ulbsibiu.ro; sesiune cu token. Panoul de administrare este restricționat la utilizatori cu drept de admin.",
+      "stack": {
+        "Mobil / Web": [
+          "Expo 54",
+          "React Native 0.81",
+          "React 19",
+          "TypeScript",
+          "Redux Toolkit (RTK Query)",
+          "React Native Paper"
+        ],
+        "Backend": [
+          "PHP 8.2",
+          "Laravel 11",
+          "Filament 4 (admin)",
+          "Laravel Sanctum",
+          "Socialite"
+        ],
+        "Date": [
+          "MySQL",
+          "Cozi și cache în baza de date"
+        ],
+        "Calitate": [
+          "Pest / PHPUnit",
+          "Pint"
+        ]
+      },
+      "arch": [
+        "flowchart LR",
+        "  APP[Aplicație Expo\\nAndroid · iOS · web] -->|REST + token| API[API Laravel]",
+        "  API --> DB[(MySQL)]",
+        "  API -->|proxy| SCH[Schedule API]",
+        "  API -->|profil academic| UMS[UMS]",
+        "  API -->|scraping programat| SITE[ulbsibiu.ro]",
+        "  API -->|notificări| EXPO[Expo Push]",
+        "  ADM[Panou Filament] --> API",
+        "  APP -->|Google Sign-In| G[Google]"
+      ],
+      "arch_note": "Backendul Laravel este punctul unic de acces pentru aplicație: face proxy către API-ul de orar, sincronizează profilul din UMS și rulează periodic comenzi care preiau știrile și evenimentele.",
+      "deployment": [
+        "Backend și aplicația web sunt găzduite pe o mașină virtuală a universității; la fiecare push pe `main` un runner self-hosted actualizează codul, rulează migrările și publică build-ul web.",
+        "Aplicațiile mobile sunt construite cu EAS și distribuite prin Google Play și App Store (publicare declanșată manual).",
+        "Un singur domeniu servește pagina de prezentare, aplicația web (`/app`) și panoul de administrare."
+      ],
+      "quality": [
+        "Teste backend cu Pest",
+        "Linting cu Pint",
+        "Backend: CI/CD cu GitHub Actions"
+      ],
+      "run_local": [
+        "Backend: `composer install`, `cp .env.example .env`, `php artisan key:generate`, `php artisan migrate --seed`, `php artisan serve`",
+        "Frontend: `npm install`, `cp .env.example .env`, `npm start` (Expo) sau `npm run web`",
+        "Pentru dezvoltare fără cont Google există un mod demo în aplicație."
+      ],
+      "screenshots": [
+        {
+          "file": "pagina_principala.png",
+          "caption": "Ecranul principal: știri și evenimente"
+        },
+        {
+          "file": "cod_scanat.png",
+          "caption": "Confirmarea prezenței după scanarea codului QR"
+        },
+        {
+          "file": "admin.png",
+          "caption": "Panoul de administrare (statistici)"
+        },
+        {
+          "file": "despre.png",
+          "caption": "Ecranul „Despre”"
+        }
+      ],
+      "people": [
+        {
+          "name": "Cantemir Mihu",
+          "role": "tech-lead",
+          "confirmed": false,
+          "draft_source": "git: mcanti, 333 commit-uri"
+        }
+      ]
+    },
+    {
+      "slug": "schedule",
+      "name": "Schedule",
+      "tagline": "Sistemul de orar al universității",
+      "status": "production",
+      "version": "1.0.0",
+      "url": "https://schedule.ulbsibiu.ro",
+      "repos": [
+        {
+          "name": "schedule",
+          "private": true
+        }
+      ],
+      "description": "Schedule înlocuiește vechiul sistem de orar și deservește cele 9 facultăți ale ULBS. Administratorii construiesc orarul într-un editor grafic cu drag-and-drop și verificare automată a conflictelor, iar studenții și cadrele didactice îl consultă public, fără autentificare. Aplicația gestionează și sesiunile de examene și înregistrează prezența prin coduri QR. Datele sunt expuse printr-un API REST documentat, folosit de alte aplicații Code4ULBS.",
+      "features": [
+        "Editor de orar cu drag-and-drop și detectarea conflictelor de săli, profesori și grupe",
+        "Orar public: căutare după specializare, grupă, profesor sau sală",
+        "Planificarea examenelor și a sesiunilor",
+        "Prezență prin coduri QR dinamice și raportare",
+        "Import și export (Excel, CSV, PDF, iCalendar)",
+        "API REST cu documentație OpenAPI"
+      ],
+      "roles": [
+        "Student și cadru didactic (consultare publică)",
+        "Administrator de facultate",
+        "Cadru didactic (generare cod QR de prezență)"
+      ],
+      "integrations": [
+        "Google Workspace (autentificare)",
+        "ULBS Connect (prezență, orar)",
+        "Plata cu ora (orar profesori)",
+        "UMS"
+      ],
+      "auth": "Citirea orarului este publică. Administrarea și generarea codurilor de prezență necesită autentificare Google Workspace; API-ul folosește token-uri și limitare de rată.",
+      "stack": {
+        "Frontend": [
+          "Vue 3",
+          "TypeScript",
+          "Vuetify",
+          "Vite",
+          "Client API generat din OpenAPI"
+        ],
+        "Backend": [
+          "PHP 8.2+",
+          "Laravel 12",
+          "OpenAPI / Swagger"
+        ],
+        "Date": [
+          "MySQL 8"
+        ],
+        "Infrastructură": [
+          "Docker",
+          "Docker Compose"
+        ]
+      },
+      "arch": [
+        "flowchart LR",
+        "  U[Studenți și profesori] --> FE[Aplicație Vue + Vuetify]",
+        "  ADM[Administratori] --> FE",
+        "  FE -->|REST| API[API Laravel 12]",
+        "  API --> D1[(DB facultate 1)]",
+        "  API --> D2[(DB facultate 2)]",
+        "  API --> DN[(… 9 baze de date)]",
+        "  CON[ULBS Connect] -->|API cu token| API",
+        "  PO[Plata cu ora] -->|API cu token| API"
+      ],
+      "arch_note": "Arhitectură multi-bază de date: fiecare facultate are propria bază, cu o structură standardizată, iar API-ul selectează baza după codul facultății.",
+      "deployment": [
+        "Mediu de producție și mediu de staging administrat prin Coolify.",
+        "Imagini Docker pentru API și frontend, definite în `docker-compose`.",
+        "Documentația API (Swagger) este publicată împreună cu aplicația."
+      ],
+      "quality": [
+        "Documentație OpenAPI generată automat",
+        "Audit al modificărilor",
+        "Teste automate și CI/CD în GitHub Actions"
+      ],
+      "run_local": [
+        "API: `cd api`, `composer install`, `cp .env.example .env`, `php artisan key:generate`, `php artisan migrate`, `php artisan serve`",
+        "Frontend: `cd frontend/schedule-app`, `npm install`, `npm run dev`"
+      ],
+      "screenshots": [
+        {
+          "file": "edit_schedule.png",
+          "caption": "Editorul de orar"
+        },
+        {
+          "file": "admin.png",
+          "caption": "Panoul de administrare a resurselor"
+        }
+      ],
+      "people": [
+        {
+          "name": "Cantemir Mihu",
+          "role": "tech-lead",
+          "confirmed": false,
+          "draft_source": "git: mcanti, 725 commit-uri"
+        }
+      ]
+    },
+    {
+      "slug": "gradis",
+      "name": "Gradis",
+      "tagline": "Raportarea activității didactice și de cercetare",
+      "status": "production",
+      "version": "1.0.0",
+      "url": "https://gradis.ulbsibiu.ro",
+      "repos": [
+        {
+          "name": "gradis-backend",
+          "private": true
+        },
+        {
+          "name": "gradis-frontend",
+          "private": true
+        },
+        {
+          "name": "gradis-tools",
+          "private": true
+        }
+      ],
+      "description": "Gradis (Grila de evaluare a Activității Didactice și Științifice) este sistemul prin care cadrele didactice își raportează contribuțiile: articole, cărți, citări, proiecte, conferințe, brevete și activități didactice. Contribuțiile sunt validate, punctate automat pe baza grilelor universității și exportate în formatele cerute de raportările instituționale.",
+      "features": [
+        "Peste 20 de tipuri de contribuții (articole, cărți, citări, proiecte, brevete, comisii etc.)",
+        "Import după DOI și în masă din BibTeX; import de citări din surse externe",
+        "Calcul de punctaje prin reguli configurabile, stocate în baza de date",
+        "Flux de validare cu istoric complet al modificărilor",
+        "Statistici pe departamente și facultăți; export Excel și PDF",
+        "Server MCP pentru integrarea cu instrumente AI"
+      ],
+      "roles": [
+        "Profesor",
+        "Secretar",
+        "Validator",
+        "Administrator"
+      ],
+      "integrations": [
+        "Google (autentificare)",
+        "Crossref și OpenAlex (metadate)",
+        "Web of Science și Scopus (citări)",
+        "Google Scholar"
+      ],
+      "auth": "Autentificare Google OAuth2 cu conturi @ulbsibiu.ro; roluri stocate în aplicație, istoric al modificărilor la nivel de entitate, impersonare controlată pentru administratori.",
+      "stack": {
+        "Backend": [
+          "Java 21",
+          "Spring Boot 4",
+          "Spring Security (OAuth2)",
+          "Spring Data JPA / Hibernate Envers",
+          "Flyway",
+          "Quartz",
+          "Spring AI (server MCP)"
+        ],
+        "Frontend": [
+          "Vue 3",
+          "Vuetify 3",
+          "Pinia",
+          "Vite",
+          "TypeScript",
+          "vue-i18n (ro/en)",
+          "Client API generat din OpenAPI"
+        ],
+        "Date": [
+          "PostgreSQL 16",
+          "Sesiuni în baza de date"
+        ],
+        "Calitate": [
+          "JUnit + Mockito",
+          "Playwright (E2E)",
+          "Spotless",
+          "Semgrep",
+          "Teste de performanță k6"
+        ]
+      },
+      "arch": [
+        "flowchart LR",
+        "  U[Profesori · secretari · validatori] --> FE[SPA Vue + Vuetify]",
+        "  FE -->|REST + sesiune| BE[Backend Spring Boot]",
+        "  BE --> DB[(PostgreSQL)]",
+        "  BE --> CR[Crossref · OpenAlex]",
+        "  BE --> WS[Web of Science · Scopus · Scholar]",
+        "  BE -->|OAuth2| G[Google]",
+        "  BE --> MCP[Server MCP]"
+      ],
+      "arch_note": "Toate contribuțiile moștenesc o entitate de bază comună; punctajele sunt calculate de scripturi CEL (Common Expression Language) păstrate în baza de date, deci regulile pot fi schimbate fără redeploy.",
+      "deployment": [
+        "Producție pe servere ale universității: backend ca serviciu `systemd`, frontend servit de Nginx.",
+        "Mediu de staging separat; pipeline-uri GitHub Actions rulează testele, construiesc artefactul și reîncarcă serviciul.",
+        "Backup automat al bazei de date de două ori pe zi, cu retenție de 30 de zile.",
+        "Teste E2E zilnice și teste de performanță săptămânale."
+      ],
+      "quality": [
+        "Teste unitare și de integrare în backend",
+        "E2E zilnic cu Playwright",
+        "Analiză statică (Semgrep) și formatare (Spotless)",
+        "Documentație de utilizator în limba română"
+      ],
+      "run_local": [
+        "Bază de date: `cd backend`, `docker compose -f db-compose.yaml up -d`",
+        "Backend: `./gradlew bootRun` (port 8080)",
+        "Frontend: `cd frontend/gradis-frontend-vuejs`, `npm install`, `npm run dev` (port 3000)"
+      ],
+      "screenshots": [
+        {
+          "file": "pagina_principala.png",
+          "caption": "Centralizatorul de indicatori"
+        },
+        {
+          "file": "status.png",
+          "caption": "Starea îndeplinirii cerințelor"
+        },
+        {
+          "file": "adauga_articol.png",
+          "caption": "Adăugarea unui articol"
+        },
+        {
+          "file": "importa_articole.png",
+          "caption": "Import din BibTeX"
+        },
+        {
+          "file": "importa_citari.png",
+          "caption": "Import de citări din surse externe"
+        }
+      ],
+      "people": [
+        {
+          "name": "Cantemir Mihu",
+          "role": "tech-lead",
+          "confirmed": false,
+          "draft_source": "git: mcanti, ~1000 commit-uri în backend + frontend"
+        }
+      ]
+    },
+    {
+      "slug": "platacuora",
+      "name": "Plata cu ora",
+      "tagline": "Declarațiile de plată cu ora, de la completare la PDF aprobat",
+      "status": "production",
+      "version": "1.0.0",
+      "url": "https://platacuora.ulbsibiu.ro",
+      "repos": [
+        {
+          "name": "platacuora",
+          "private": true
+        }
+      ],
+      "description": "Aplicația digitalizează fluxul declarațiilor „plata cu ora”, care înainte circulau ca fișiere Excel prin email sau pe hârtie. Cadrul didactic își completează orele (manual sau prin încărcarea orarului), aplicația generează declarația, validatorul din departament o aprobă sau o respinge, iar la final se descarcă PDF-ul oficial.",
+      "features": [
+        "Listă de ore și calendar lunar, cu zile libere și sărbători",
+        "Generarea declarației și export PDF",
+        "Panou de validare pentru validatori, cu remindere",
+        "Configurarea semestrelor și a perioadelor de vacanță",
+        "Cereri de acces pentru utilizatori externi, aprobate de administratorul universității",
+        "Jurnal de audit"
+      ],
+      "roles": [
+        "Profesor",
+        "Validator",
+        "Administrator de facultate",
+        "Super-administrator (universitate)"
+      ],
+      "integrations": [
+        "Google (autentificare)",
+        "UMS (verificarea utilizatorilor)",
+        "Schedule (orar)",
+        "API de zile libere",
+        "Email (notificări)"
+      ],
+      "auth": "Autentificare Google OAuth. Utilizatorii sunt căutați în UMS; conturile necunoscute intră în starea „în așteptare” până la aprobarea de către super-administrator.",
+      "stack": {
+        "Frontend": [
+          "Angular 20",
+          "Angular Material",
+          "NgRx",
+          "RxJS",
+          "TypeScript"
+        ],
+        "Backend": [
+          "Node.js",
+          "Express 5",
+          "Mongoose",
+          "Passport (Google OAuth)",
+          "Puppeteer (generare PDF)",
+          "Nodemailer"
+        ],
+        "Date": [
+          "MongoDB 7"
+        ],
+        "Calitate": [
+          "Karma / Jasmine",
+          "Jest + Supertest",
+          "ESLint + Prettier",
+          "Husky"
+        ]
+      },
+      "arch": [
+        "flowchart LR",
+        "  U[Profesori · validatori · admini] --> FE[SPA Angular\\nnginx]",
+        "  FE -->|/api| BE[API Express]",
+        "  BE --> DB[(MongoDB)]",
+        "  BE -->|PDF| PP[Puppeteer]",
+        "  BE --> UMS[UMS proxy]",
+        "  BE --> SCH[Schedule API]",
+        "  BE --> HOL[API zile libere]",
+        "  BE --> SMTP[Email]",
+        "  BE -->|OAuth| G[Google]"
+      ],
+      "arch_note": "Backend structurat pe rute, controllere, servicii și modele; declarația PDF se generează dintr-un șablon HTML randat de un browser headless. Clientul pentru API-ul de orar este generat din specificația OpenAPI.",
+      "deployment": [
+        "Producție: la push pe `main`, un runner self-hosted construiește frontendul și actualizează serverul; backendul rulează ca serviciu `systemd`.",
+        "Staging: Docker Compose (MongoDB, backend, frontend cu nginx) administrat prin Coolify; doar frontendul este expus.",
+        "Backup zilnic al bazei de date, cu retenție de 7 zile.",
+        "Documentație tehnică publicată cu MkDocs / Backstage TechDocs."
+      ],
+      "quality": [
+        "Teste unitare în frontend și backend",
+        "Linting + formatare + hook-uri pre-commit",
+        "Dependabot",
+        "Descriere API în OpenAPI"
+      ],
+      "run_local": [
+        "Container: `docker compose -f utils/docker-compose.yaml up` (MongoDB, backend, frontend)",
+        "Manual: `cd backend && npm install && npm run start:dev`; `cd frontend && npm install && ng serve`"
+      ],
+      "screenshots": [
+        {
+          "file": "lista_ore.png",
+          "caption": "Lista de ore"
+        },
+        {
+          "file": "configurare_semestru.png",
+          "caption": "Configurarea semestrului"
+        }
+      ],
+      "people": [
+        {
+          "name": "Cantemir Mihu",
+          "role": "tech-lead",
+          "confirmed": false,
+          "draft_source": "autor în docs/Project.md; top contributori git: AleChv223, Csodo-02, adita111"
+        }
+      ]
+    },
+    {
+      "slug": "internships",
+      "name": "Internships",
+      "tagline": "Gestiunea stagiilor de practică ale studenților",
+      "status": "development",
+      "url": null,
+      "repos": [
+        {
+          "name": "internships",
+          "private": true
+        }
+      ],
+      "description": "Platformă prin care studenții din anii II–III găsesc o companie pentru stagiul de practică, companiile publică poziții și programează interviuri, iar departamentul moderează conținutul, setează termenele și atribuie locuri de practică în facultate celor rămași fără poziție. Funcționează ca un portal de joburi, cu tot fluxul: aplicare, interviu, acceptare, notare finală.",
+      "features": [
+        "Companii: cont, profil și poziții, aprobate de departament",
+        "Studenți: listă paginată de poziții cu căutare, aplicare, CV și poză",
+        "Interviuri și rezultatul lor, în aplicație",
+        "Acceptarea unui student retrage automat celelalte aplicații",
+        "Departament: termene, import de studenți și note, locuri de practică în facultate, export de note",
+        "Hartă a companiilor și facultăților"
+      ],
+      "roles": [
+        "Student",
+        "Reprezentant al companiei",
+        "Reprezentant al departamentului"
+      ],
+      "integrations": [
+        "Google (autentificare)"
+      ],
+      "auth": "Google OAuth2 (Socialite) ca metodă principală; token-uri Sanctum pentru API.",
+      "stack": {
+        "Frontend": [
+          "React",
+          "TypeScript",
+          "Vite"
+        ],
+        "Backend": [
+          "PHP",
+          "Laravel",
+          "Laravel Sanctum",
+          "Pattern repository + service layer"
+        ],
+        "Date": [
+          "PostgreSQL 16"
+        ],
+        "Infrastructură": [
+          "Docker Compose",
+          "Coolify"
+        ]
+      },
+      "arch": [
+        "flowchart LR",
+        "  S[Studenți] & C[Companii] & D[Departament] --> FE[React + Vite]",
+        "  FE -->|REST + token| BE[API Laravel]",
+        "  BE --> DB[(PostgreSQL)]",
+        "  BE -->|OAuth2| G[Google]"
+      ],
+      "arch_note": "Backend cu repository-uri pentru acces la date, servicii pentru logica de business și Form Request-uri pentru validarea intrărilor. Ciclul unei aplicații: în așteptare → interviu programat → acceptată / respinsă.",
+      "deployment": [
+        "Local: Docker Compose cu PostgreSQL, backend și frontend.",
+        "Staging: fișier Compose dedicat pentru Coolify."
+      ],
+      "quality": [
+        "Dependabot pentru dependențe",
+        "Instrucțiuni pentru asistenți AI în repository",
+        "Documentație de cerințe și teste"
+      ],
+      "run_local": [
+        "`cp .env.example .env`, apoi `docker compose up --build`",
+        "Backend pe portul 8000, frontend pe 5173"
+      ],
+      "screenshots": [],
+      "people": [
+        {
+          "name": "sebiseba2022",
+          "role": "tech-lead",
+          "confirmed": false,
+          "draft_source": "git: top contributor (110 commit-uri) — handle GitHub, nume real necunoscut"
+        }
+      ]
+    },
+    {
+      "slug": "exams",
+      "name": "Exams",
+      "tagline": "Examene grilă: generare de variante și corectare automată",
+      "status": "staging",
+      "url": null,
+      "repos": [
+        {
+          "name": "exams",
+          "private": true
+        }
+      ],
+      "description": "Aplicația permite profesorilor să creeze examene structurate (text, cod și imagini), să genereze variante amestecate, să le previzualizeze și să le tipărească. Un modul de recunoaștere optică a marcajelor (OMR) citește foile de răspuns scanate pentru corectarea automată.",
+      "features": [
+        "Editor de examene cu blocuri de text, cod (Monaco) și imagini",
+        "Generare de variante amestecate și previzualizare pentru tipărire",
+        "Corectare automată din foi scanate (modul OMR)",
+        "Interfață în română și engleză"
+      ],
+      "roles": [
+        "Profesor / examinator"
+      ],
+      "integrations": [
+        "Google (autentificare OIDC)"
+      ],
+      "auth": "Google OIDC în backend; sesiune cu cookie și protecție CSRF, cu limitare de rată pe rutele sensibile.",
+      "stack": {
+        "Frontend": [
+          "React 19",
+          "Vite 7",
+          "TypeScript",
+          "react-router 7",
+          "i18next",
+          "Monaco editor"
+        ],
+        "Backend": [
+          "Python 3.11+",
+          "FastAPI",
+          "SQLAlchemy 2",
+          "Alembic"
+        ],
+        "Date": [
+          "PostgreSQL 16"
+        ],
+        "OMR": [
+          "Python",
+          "Pillow"
+        ],
+        "Calitate": [
+          "pytest",
+          "Vitest",
+          "Cypress",
+          "ruff / pylint / pyright",
+          "ESLint"
+        ]
+      },
+      "arch": [
+        "flowchart LR",
+        "  U[Profesor] --> FE[React + Vite]",
+        "  FE -->|/api + cookie + CSRF| BE[FastAPI]",
+        "  BE --> DB[(PostgreSQL)]",
+        "  BE -->|OIDC| G[Google]",
+        "  OMR[Modul OMR] -.->|în curs de integrare| BE"
+      ],
+      "arch_note": "Backend modular (`auth`, `exams`, `users`), cu migrări Alembic rulate automat la pornire. Modulul OMR este deocamdată independent de API.",
+      "deployment": [
+        "Docker Compose (PostgreSQL, backend, frontend) pentru dezvoltare și staging; staging administrat prin Coolify.",
+        "Teste de backend pe fiecare pull request și zilnic; teste E2E Cypress zilnice pe runner self-hosted."
+      ],
+      "quality": [
+        "Teste unitare backend și frontend",
+        "E2E Cypress zilnic",
+        "Linting și verificare de tipuri",
+        "Documentație de dezvoltare în repository"
+      ],
+      "run_local": [
+        "`cp .env.example .env`, apoi `docker compose up --build -d`",
+        "Teste: `npm test`, `npm run test:e2e`"
+      ],
+      "screenshots": [],
+      "people": [
+        {
+          "name": "AlexM-058",
+          "role": "tech-lead",
+          "confirmed": false,
+          "draft_source": "git: top contributor (95 commit-uri) — handle GitHub, nume real necunoscut"
+        }
+      ]
+    },
+    {
+      "slug": "teme-licenta",
+      "name": "Teme licență",
+      "tagline": "Propunerea, alegerea și gestiunea temelor de licență",
+      "status": "production",
+      "url": "https://thesis.ulbsibiu.ro",
+      "repos": [
+        {
+          "name": "teme_licenta",
+          "private": true
+        }
+      ],
+      "description": "Profesorii propun teme de licență, studenții le răsfoiesc și filtrează după facultate și specializare, își exprimă interesul și aplică, iar profesorii acceptă cererile și completează planul tematic. Administratorii de departament gestionează profesorii și cotele, iar superadministratorii anii academici și statisticile.",
+      "features": [
+        "Răsfoire și filtrare teme, aprecieri, aplicări",
+        "Acceptarea cererilor și planul tematic generat ca document",
+        "Cote de teme pe profesor și an academic",
+        "Notificări prin email, statistici, reguli publicate",
+        "Mai multe roluri pe același cont, cu schimbare de rol"
+      ],
+      "roles": [
+        "Student",
+        "Profesor",
+        "Administrator de departament",
+        "Superadministrator"
+      ],
+      "integrations": [
+        "Google (autentificare)",
+        "UMS (statut student/profesor, facultăți, specializări)",
+        "Email"
+      ],
+      "auth": "Google Sign-In; tokenul Google este verificat în backend, statutul este confirmat în UMS, iar aplicația emite o sesiune în cookie HttpOnly.",
+      "stack": {
+        "Frontend": [
+          "Angular 21",
+          "Angular Material",
+          "Bootstrap 5",
+          "TypeScript"
+        ],
+        "Backend": [
+          "Node.js",
+          "Express 5",
+          "Prisma 7",
+          "google-auth-library",
+          "Nodemailer",
+          "Puppeteer (documente)"
+        ],
+        "Date": [
+          "PostgreSQL"
+        ],
+        "Calitate": [
+          "Vitest",
+          "Node test runner",
+          "Playwright (E2E)"
+        ]
+      },
+      "arch": [
+        "flowchart LR",
+        "  U[Studenți · profesori · admini] --> FE[SPA Angular\\nnginx]",
+        "  FE -->|/api| BE[API Express]",
+        "  BE --> DB[(PostgreSQL\\nPrisma)]",
+        "  BE --> UMS[UMS proxy]",
+        "  BE -->|verificare token| G[Google]",
+        "  BE --> SMTP[Email]"
+      ],
+      "arch_note": "UMS este sursa de adevăr pentru statut și structura academică; catalogul de facultăți, departamente și specializări este sincronizat în baza proprie la pornire.",
+      "deployment": [
+        "Docker Compose pentru local, staging și producție; la staging și producție este expus doar frontendul.",
+        "Staging administrat prin Coolify; schema bazei de date este aplicată prin Prisma la pornire.",
+        "Workflow-uri GitHub Actions pentru PR automat către staging, protecția ramurii principale, teste, smoke și E2E."
+      ],
+      "quality": [
+        "Teste backend și frontend",
+        "Teste E2E și smoke pe staging",
+        "Protecție a ramurii principale în CI"
+      ],
+      "run_local": [
+        "`cp .env.docker.example .env.docker`, completează valorile, apoi `docker compose up --build`",
+        "Aplicația pornește pe http://localhost:4200"
+      ],
+      "screenshots": [],
+      "people": [
+        {
+          "name": "Sebiobo",
+          "role": "tech-lead",
+          "confirmed": false,
+          "draft_source": "git: top contributor (82 commit-uri) — handle GitHub, nume real necunoscut"
+        }
+      ]
+    },
+    {
+      "slug": "adeverinte",
+      "name": "Adeverințe",
+      "tagline": "Adeverințe de student generate și verificabile",
+      "status": "development",
+      "url": null,
+      "repos": [
+        {
+          "name": "adeverinte",
+          "private": true
+        }
+      ],
+      "description": "Aplicația generează adeverințe pentru studenți pe baza datelor din UMS și a unor șabloane de documente, convertite în PDF. Autentificarea se face cu Google, iar datele studentului sunt preluate printr-un proxy către UMS.",
+      "features": [
+        "Autentificare Google a studentului",
+        "Date personale preluate din UMS",
+        "Șabloane de adeverințe în format Word, convertite în PDF",
+        "Frontend static servit de API sau de nginx, API documentat cu Swagger"
+      ],
+      "roles": [
+        "Student"
+      ],
+      "integrations": [
+        "Google (autentificare)",
+        "UMS proxy",
+        "Servicii de conversie documente"
+      ],
+      "auth": "Google Sign-In verificat în API.",
+      "stack": {
+        "Backend": [
+          ".NET 8",
+          "ASP.NET Core Web API",
+          "DocumentFormat.OpenXml",
+          "Google.Apis.Auth",
+          "Swagger"
+        ],
+        "Frontend": [
+          "HTML/JavaScript static",
+          "nginx"
+        ],
+        "Calitate": [
+          "Teste unitare și de integrare (Coverlet, prag 80%)",
+          "Teste E2E pe staging"
+        ],
+        "Infrastructură": [
+          "Docker Compose"
+        ]
+      },
+      "arch": [
+        "flowchart LR",
+        "  S[Student] --> FE[Frontend static]",
+        "  FE -->|REST| API[API ASP.NET Core]",
+        "  API -->|token| G[Google]",
+        "  API --> UMS[UMS proxy]",
+        "  API --> X[Serviciu Excel / Drive]",
+        "  API --> DOC[docx → PDF]"
+      ],
+      "arch_note": "API-ul servește și frontendul static în modul de dezvoltare; în Docker, frontendul rulează în propriul container nginx.",
+      "deployment": [
+        "Docker Compose cu servicii separate pentru API, frontend și serviciul auxiliar pentru Excel.",
+        "Pipeline CI/CD cu build cu avertismente tratate ca erori și prag de acoperire de 80%; E2E pe staging rulează la cerere."
+      ],
+      "quality": [
+        "Prag de acoperire 80%",
+        "Build cu avertismente ca erori",
+        "E2E pe staging",
+        "Instrucțiuni pentru asistenți AI"
+      ],
+      "run_local": [
+        "`dotnet run --project UlbsDocAuth.Api --launch-profile http` sau `docker compose up --build`"
+      ],
+      "screenshots": [],
+      "people": [
+        {
+          "name": "Dutzu05",
+          "role": "tech-lead",
+          "confirmed": false,
+          "draft_source": "git: top contributor (53 commit-uri) — handle GitHub, nume real necunoscut"
+        }
+      ]
+    }
+  ],
+  "support": [
+    {
+      "slug": "backstage",
+      "name": "Backstage",
+      "tagline": "Catalogul software al Code4ULBS",
+      "status": "staging",
+      "repos": [
+        {
+          "name": "ulbs-backstage",
+          "private": true
+        }
+      ],
+      "description": "Instanță Backstage pentru dezvoltatori: catalog al aplicațiilor, API-urilor și resurselor Code4ULBS, documentație tehnică (TechDocs) și șabloane pentru proiecte noi. Fiecare repository publică un fișier `catalog-info.yaml` pe care Backstage îl importă.",
+      "stack": [
+        "Backstage 1.48",
+        "Node 24",
+        "Yarn 4",
+        "TypeScript",
+        "PostgreSQL 16",
+        "Playwright"
+      ],
+      "people": []
+    },
+    {
+      "slug": "ums-proxy",
+      "name": "UMS proxy",
+      "tagline": "Acces controlat la datele din UMS",
+      "status": "production",
+      "repos": [
+        {
+          "name": "ums-g8",
+          "private": true
+        }
+      ],
+      "description": "Serviciu mic care stă în fața API-ului UMS: păstrează credențialele amonte într-un singur loc, reînnoiește tokenul și expune aplicațiilor Code4ULBS un API simplu, protejat cu cheie de API.",
+      "stack": [
+        "Node.js 20+",
+        "Docker"
+      ],
+      "people": []
+    },
+    {
+      "slug": "site-cie",
+      "name": "Site-ul Departamentului CIE",
+      "tagline": "Site multilingv cu CMS propriu",
+      "status": "production",
+      "url": "https://inginerie.ulbsibiu.ro/dep.cie/",
+      "repos": [
+        {
+          "name": "site_dep_cie",
+          "private": true
+        }
+      ],
+      "description": "Site public (română și engleză) pentru Departamentul de Calculatoare și Inginerie Electrică, cu panou de administrare: pagini versionate, știri, meniuri, bibliotecă media și pagina cadrelor didactice, cu roluri și permisiuni.",
+      "stack": [
+        "Laravel 12",
+        "PHP 8.4",
+        "React 19",
+        "Vite",
+        "Tailwind 4",
+        "MySQL 8",
+        "Docker"
+      ],
+      "people": []
+    }
+  ],
+  "standards": [
+    {
+      "title": "Autentificare Google",
+      "text": "Cont Google Workspace @ulbsibiu.ro, fără parole locale."
+    },
+    {
+      "title": "Pull request + review",
+      "text": "Ramura principală protejată; cel puțin o aprobare și verificări de CI trecute."
+    },
+    {
+      "title": "Dezvoltare pornită din issue",
+      "text": "Fără cod fără issue; fiecare PR este legat de un issue."
+    },
+    {
+      "title": "Teste",
+      "text": "Acoperire de minimum 80% și teste E2E rulate cel puțin o dată pe zi."
+    },
+    {
+      "title": "CI/CD",
+      "text": "GitHub Actions pe runnere găzduite de universitate, cu medii de staging și producție."
+    },
+    {
+      "title": "Containere",
+      "text": "Compatibilitate Docker și Podman, cu configurare prin variabile de mediu."
+    },
+    {
+      "title": "Baze de date",
+      "text": "Backup automat și istoric al modificărilor (audit)."
+    },
+    {
+      "title": "Design și accesibilitate",
+      "text": "Ghidul vizual ULBS, interfață adaptabilă și conformitate WCAG 2.1 AA."
+    }
+  ],
+  "infra": [
+    {
+      "title": "Coolify",
+      "text": "Platforma de staging care administrează aplicațiile Code4ULBS; fiecare aplicație își expune doar frontendul."
+    },
+    {
+      "title": "Runnere self-hosted",
+      "text": "Build-uri, teste și deploy în infrastructura universității."
+    },
+    {
+      "title": "Backstage",
+      "text": "Catalog software, documentație tehnică și șabloane de proiect."
+    },
+    {
+      "title": "UMS proxy",
+      "text": "Punct unic și controlat de acces la datele universitare."
+    }
+  ]
+}
