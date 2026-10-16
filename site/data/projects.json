@@ -5,20 +5,9 @@
     "about": "Code4ULBS este o inițiativă a Universității „Lucian Blaga” din Sibiu (ULBS), realizată în colaborare cu Sibiu IT Cluster. Echipe de studenți și profesioniști din industrie lucrează împreună, ca mentori și colegi, la aplicații reale pentru comunitatea universitară: de la orar și raportarea cercetării până la aplicația mobilă a studenților.",
     "starter_url": "https://github.com/code4ulbs/code4ulbs-starter",
     "org_url": "https://github.com/code4ulbs",
-    "cie_url": "https://inginerie.ulbsibiu.ro/dep.cie/pages/code4ulbs"
+    "cie_url": "https://inginerie.ulbsibiu.ro/dep.cie/pages/code4ulbs",
+    "repo_url": "https://github.com/code4ulbs/code4ulbs.github.io"
   },
-  "ecosystem": [
-    "flowchart LR",
-    "  UMS[(UMS ULBS)] --> P[UMS proxy]",
-    "  P --> PO[Plata cu ora]",
-    "  P --> TL[Teme licență]",
-    "  P --> AD[Adeverințe]",
-    "  SCH[Schedule\\norar + prezență] --> CON[ULBS Connect\\naplicație mobilă]",
-    "  SCH --> PO",
-    "  GR[Gradis]",
-    "  EX[Exams]",
-    "  IN[Internships]"
-  ],
   "projects": [
     {
       "slug": "ulbs-connect",
@@ -75,7 +64,7 @@
           "Socialite"
         ],
         "Date": [
-          "MySQL",
+          "PostgreSQL",
           "Cozi și cache în baza de date"
         ],
         "Calitate": [
@@ -86,7 +75,7 @@
       "arch": [
         "flowchart LR",
         "  APP[Aplicație Expo\\nAndroid · iOS · web] -->|REST + token| API[API Laravel]",
-        "  API --> DB[(MySQL)]",
+        "  API --> DB[(PostgreSQL)]",
         "  API -->|proxy| SCH[Schedule API]",
         "  API -->|profil academic| UMS[UMS]",
         "  API -->|scraping programat| SITE[ulbsibiu.ro]",

@@ -1,0 +1,172 @@
+@startuml landscape
+' Peisajul aplicațiilor Code4ULBS.
+' Sursa diagramei de pe pagina de portofoliu. Se randează cu `site/diagrams/render.sh`.
+'
+' Cum se extinde:
+'   - aplicație nouă   : copiază un bloc "rectangle ... <<prod>>" + (opțional) "database", apoi leagă-l
+'                        de Google (autentificare), UMS proxy, Schedule etc.
+'   - status           : <<prod>> = în producție, <<dev>> = staging / în dezvoltare
+'   - bază de date     : "database" pentru fiecare aplicație care are una; scrie "fără bază de date" unde nu are
+'   - zonă externă     : sistemele necontrolate de ULBS se pun în pachetul EXT
+
+!pragma layout elk
+
+skinparam shadowing false
+hide stereotype
+skinparam legendBackgroundColor #FFFFFF
+skinparam legendBorderColor #EDEDED
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 13
+skinparam roundCorner 10
+skinparam ArrowColor #454B67
+skinparam ArrowFontColor #414755
+skinparam ArrowFontSize 11
+skinparam packageStyle rectangle
+skinparam package {
+  FontColor #0B2F63
+  BorderColor #0B2F63
+}
+skinparam rectangle {
+  FontColor #011F5B
+}
+skinparam rectangle<<prod>> {
+  BackgroundColor #D7E1EB
+  BorderColor #0B2F63
+}
+skinparam rectangle<<dev>> {
+  BackgroundColor #FFFFFF
+  BorderColor #959392
+}
+skinparam rectangle<<infra>> {
+  BackgroundColor #FFFFFF
+  BorderColor #0B2F63
+}
+skinparam rectangle<<restricted>> {
+  BackgroundColor #FFFFFF
+  BorderColor #EE1927
+}
+skinparam rectangle<<external>> {
+  BackgroundColor #FFFFFF
+  BorderColor #F7A30F
+}
+skinparam database {
+  BackgroundColor #E4F4CC
+  BorderColor #2B5A00
+  FontColor #2B5A00
+}
+skinparam cloud {
+  BackgroundColor #FFFFFF
+  BorderColor #4285F4
+  FontColor #011F5B
+}
+
+title Peisajul aplicațiilor Code4ULBS
+
+cloud "**Google Workspace**\nautentificare OAuth (@ulbsibiu.ro)" as G
+
+package "ULBS on-prem" as ONP #F7F7F7 {
+
+  package "Sisteme universitare\n(acces restricționat)" as UNI #FDECEE {
+    rectangle "EMSYS" as EMSYS <<restricted>>
+    rectangle "SmartUMS" as UMS <<restricted>>
+  }
+
+  rectangle "MyAccount\n//apiintern//" as MYA <<infra>>
+  rectangle "**UMS proxy** (ums-g8)\nNode.js\n//fără bază de date//" as PX <<infra>>
+
+  rectangle " " as C_GR #transparent;line:transparent {
+    rectangle "**Gradis**\ngradis.ulbsibiu.ro\nVue + Spring Boot" as GR <<prod>>
+    database "PostgreSQL" as GRDB
+  }
+
+  rectangle " " as C_SC #transparent;line:transparent {
+    rectangle "**Schedule**\nschedule.ulbsibiu.ro\nVue + Laravel API" as SC <<prod>>
+    database "MySQL ×9\n(câte una pe facultate)" as SCDB
+  }
+
+  rectangle "**Plata cu ora**\nplatacuora.ulbsibiu.ro\nAngular + Express" as PO <<prod>>
+
+  rectangle " " as C_CN #transparent;line:transparent {
+    rectangle "**ULBS Connect**\nconnect.ulbsibiu.ro\nExpo (mobil + web) + Laravel" as CN <<prod>>
+    database "PostgreSQL" as CNDB
+  }
+
+  rectangle " " as C_TL #transparent;line:transparent {
+    rectangle "**Teme licență**\nthesis.ulbsibiu.ro\nAngular + Express (Prisma)" as TL <<prod>>
+    database "PostgreSQL" as TLDB
+  }
+
+  rectangle " " as C_EX #transparent;line:transparent {
+    rectangle "**Exams**\n//staging//\nReact + FastAPI" as EX <<dev>>
+    database "PostgreSQL" as EXDB
+  }
+
+  rectangle " " as C_IN #transparent;line:transparent {
+    rectangle "**Internships**\n//în dezvoltare//\nReact + Laravel" as IN <<dev>>
+    database "PostgreSQL" as INDB
+  }
+
+  rectangle "**Adeverințe**\n//în dezvoltare//\n.NET 8\n//fără bază de date//" as AD <<dev>>
+
+  rectangle " " as C_CIE #transparent;line:transparent {
+    rectangle "**Site CIE**\nLaravel + React\n//autentificare locală, fără Google//" as CIE <<prod>>
+    database "MySQL" as CIEDB
+  }
+}
+
+package "Mediu extern, necontrolat de ULBS" as EXT #FDF6EC {
+  rectangle "**aSc Timetables**\n//programul de orar//" as ASC <<external>>
+  rectangle "**Stat de funcții**\n//fișiere Excel//" as STAT <<external>>
+  database "PostgreSQL" as STATDB
+  rectangle "**Fișa disciplinei**\n//aplicație externă//" as FISA <<external>>
+  database "**MongoDB**\n//găzduit în afara ULBS//" as MONGO #FBD5DA
+  cloud "**Surse bibliografice**\nCrossref · OpenAlex\nWeb of Science · Scopus" as BIB
+}
+
+' ---- Autentificare Google ----
+G .[#4285F4].> GR
+G .[#4285F4].> SC
+G .[#4285F4].> PO
+G .[#4285F4].> CN
+G .[#4285F4].> TL
+G .[#4285F4].> EX
+G .[#4285F4].> IN
+G .[#4285F4].> AD
+
+' ---- Date universitare ----
+UMS --> PX : API
+EMSYS --> MYA : API
+PO --> PX
+TL --> PX
+AD --> PX
+CN --> PX
+
+' ---- Orar ----
+CN --> SC : API orar,\nprezență
+PO --> SC : API orar
+SC <-- ASC : import XML
+SC <-- STAT : export Excel
+
+' ---- Baze de date ----
+GR --> GRDB
+SC --> SCDB
+CN --> CNDB
+TL --> TLDB
+EX --> EXDB
+IN --> INDB
+CIE --> CIEDB
+STAT --> STATDB
+PO --> MONGO
+
+' ---- Altele ----
+GR <-- BIB : import\ncontribuții
+
+legend right
+  <back:#D7E1EB>      </back>  în producție
+  <back:#FFFFFF>      </back>  staging / în dezvoltare
+  <back:#E4F4CC>      </back>  bază de date
+  <back:#FDF6EC>      </back>  mediu extern (necontrolat de ULBS)
+  <color:#4285F4>- - - ></color>  autentificare Google OAuth
+endlegend
+
+@enduml

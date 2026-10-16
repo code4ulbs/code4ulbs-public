@@ -141,7 +141,10 @@ def build_index(data):
   <section><h2>Despre inițiativă</h2><p>{e(s['about'])}</p></section>
   <section id="proiecte"><h2>Aplicații</h2><div class="grid">{cards}</div>
     <h3 class="sub">Infrastructură și suport</h3><div class="grid">{support}</div></section>
-  <section><h2>Cum se leagă aplicațiile</h2><p>Toate aplicațiile folosesc autentificarea Google Workspace (@ulbsibiu.ro). Diagrama arată dependențele dintre ele.</p>{mermaid(data['ecosystem'])}</section>
+  <section id="peisaj"><h2>Cum se leagă aplicațiile</h2>
+    <p>Peisajul aplicațiilor: ce rulează în infrastructura ULBS și ce este în afara ei, ce aplicații au bază de date și de ce tip, cum se autentifică utilizatorii (Google Workspace) și de unde vin datele universitare (UMS prin proxy, orarul din Schedule).</p>
+    <div class="diagram"><a href="assets/diagrams/landscape.svg" target="_blank" rel="noopener" title="Deschide diagrama mărită"><img src="assets/diagrams/landscape.svg" alt="Diagrama peisajului aplicațiilor Code4ULBS: aplicații, baze de date, autentificare Google, UMS proxy și sisteme externe" width="1929" height="1212"></a></div>
+    <p class="muted">Diagrama este generată din cod PlantUML: <a href="{e(s['repo_url'])}/blob/main/site/diagrams/landscape.puml">landscape.puml</a>. Click pe imagine pentru varianta mărită.</p></section>
   <section id="standarde"><h2>Standarde Code4ULBS</h2><p>Fiecare proiect respectă aceleași reguli, descrise în <a href="{e(s['starter_url'])}">code4ulbs-starter</a>.</p><div class="grid tiles">{stds}</div></section>
   <section><h2>Infrastructură</h2><div class="grid tiles">{infra}</div></section>
   <section id="responsabili"><h2>Cine răspunde de ce</h2>

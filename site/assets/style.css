@@ -106,3 +106,7 @@ td { padding: 10px 12px; border-bottom: 1px solid var(--ulbs-border); vertical-a
   .nav nav { gap: 14px; }
   .brand-name { font-size: 16px; }
 }
+
+/* Diagrama PlantUML */
+.diagram { width: min(95vw, 1929px); position: relative; left: 50%; transform: translateX(-50%); overflow-x: auto; border: 1px solid var(--ulbs-border); border-radius: 8px; padding: 8px; margin: 0 0 12px; background: #fff; }
+.diagram img { display: block; width: 100%; min-width: 900px; height: auto; }
