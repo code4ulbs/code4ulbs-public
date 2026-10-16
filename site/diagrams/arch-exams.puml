@@ -1,0 +1,18 @@
+@startuml arch-exams
+!include _style.iuml
+title Exams — arhitectură
+
+actor "Profesor /\nexaminator" as U
+cloud "**Google**\nOIDC" as G
+
+rectangle "**React 19 + Vite 7**\nTypeScript · i18next\nMonaco editor" as FE <<dev>>
+rectangle "**API FastAPI**\nmodule: auth · exams · users\ncookie de sesiune + CSRF" as BE <<dev>>
+database "PostgreSQL 16\nAlembic" as DB
+rectangle "**Modul OMR**\nPython · corectare din foi scanate\n//în curs de integrare//" as OMR <<dev>>
+
+U --> FE
+FE --> BE : /api
+BE --> DB
+BE .[#4285F4].> G
+OMR .[#959392].> BE : de integrat
+@enduml

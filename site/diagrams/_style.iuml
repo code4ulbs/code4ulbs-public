@@ -1,0 +1,61 @@
+' Stil comun pentru diagramele de arhitectură ale aplicațiilor Code4ULBS.
+' Se include cu:  !include _style.iuml
+' Stereotipuri:  <<app>> componentă proprie (în producție) · <<dev>> staging / în dezvoltare
+'                <<infra>> infrastructură ULBS (ex. UMS proxy) · <<external>> sistem extern necontrolat de ULBS
+' Formă:  database = bază de date · cloud = Google / servicii cloud · actor = utilizatori
+' Autentificare Google:  X .[#4285F4].> G
+
+!pragma layout smetana
+left to right direction
+
+hide stereotype
+skinparam shadowing false
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 13
+skinparam roundCorner 10
+skinparam ArrowColor #454B67
+skinparam ArrowFontColor #414755
+skinparam ArrowFontSize 11
+skinparam titleFontSize 15
+skinparam rectangle {
+  FontColor #011F5B
+  BorderColor #0B2F63
+}
+skinparam rectangle<<app>> {
+  BackgroundColor #D7E1EB
+  BorderColor #0B2F63
+}
+skinparam rectangle<<dev>> {
+  BackgroundColor #FFFFFF
+  BorderColor #959392
+}
+skinparam rectangle<<infra>> {
+  BackgroundColor #FFFFFF
+  BorderColor #0B2F63
+}
+skinparam rectangle<<external>> {
+  BackgroundColor #FFFFFF
+  BorderColor #F7A30F
+}
+skinparam database {
+  BackgroundColor #E4F4CC
+  BorderColor #2B5A00
+  FontColor #2B5A00
+}
+skinparam cloud {
+  BackgroundColor #FFFFFF
+  BorderColor #4285F4
+  FontColor #011F5B
+}
+skinparam actor {
+  BackgroundColor #FFFFFF
+  BorderColor #0B2F63
+  FontColor #011F5B
+}
+skinparam note {
+  BackgroundColor #F7F7F7
+  BorderColor #959392
+  FontColor #414755
+}
+skinparam legendBackgroundColor #FFFFFF
+skinparam legendBorderColor #EDEDED

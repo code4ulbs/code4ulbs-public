@@ -1,0 +1,22 @@
+@startuml arch-teme-licenta
+!include _style.iuml
+title Teme licență — arhitectură
+
+actor "Studenți · profesori\nadministratori" as U
+cloud "**Google**\nverificare token" as G
+
+rectangle "**SPA Angular 21**\nMaterial · Bootstrap\nnginx" as FE <<app>>
+rectangle "**API Express 5**\nPrisma 7 · documente PDF\ncookie HttpOnly" as BE <<app>>
+database "PostgreSQL" as DB
+
+rectangle "**UMS proxy**\nstatut, facultăți,\nspecializări" as PX <<infra>>
+rectangle "**Email (SMTP)**\nnotificări" as MAIL <<external>>
+
+U --> FE
+FE --> BE : /api
+BE --> DB
+BE --> PX
+BE --> MAIL
+FE .[#4285F4].> G : Sign-In
+BE .[#4285F4].> G : verifică token
+@enduml

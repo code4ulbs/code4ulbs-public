@@ -1,0 +1,20 @@
+@startuml arch-internships
+!include _style.iuml
+title Internships — arhitectură
+
+actor "Studenți" as S
+actor "Companii" as C
+actor "Departament" as D
+cloud "**Google**\nOAuth2 (Socialite)" as G
+
+rectangle "**React + Vite**\nTypeScript" as FE <<dev>>
+rectangle "**API Laravel**\nSanctum\nrepository + service layer" as BE <<dev>>
+database "PostgreSQL 16" as DB
+
+S --> FE
+C --> FE
+D --> FE
+FE --> BE : REST + token
+BE --> DB
+BE .[#4285F4].> G
+@enduml

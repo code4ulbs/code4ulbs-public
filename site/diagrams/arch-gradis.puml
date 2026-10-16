@@ -1,0 +1,23 @@
+@startuml arch-gradis
+!include _style.iuml
+title Gradis — arhitectură
+
+actor "Profesori · secretari\nvalidatori · administratori" as U
+cloud "**Google Workspace**\nOAuth2 (@ulbsibiu.ro)" as G
+
+rectangle "**SPA Vue 3 + Vuetify**\nPinia · vue-i18n\nclient API generat" as FE <<app>>
+rectangle "**Backend Spring Boot 4**\nREST · sesiune · Envers\nscripturi CEL pentru punctaje" as BE <<app>>
+rectangle "**Server MCP**\ninstrumente AI" as MCP <<app>>
+database "PostgreSQL 16\nFlyway · Envers" as DB
+
+rectangle "**Crossref · OpenAlex**\nmetadate după DOI" as X1 <<external>>
+rectangle "**Web of Science · Scopus**\n**Google Scholar**\ncitări" as X2 <<external>>
+
+U --> FE
+FE --> BE : REST + sesiune
+BE --> DB
+BE --> MCP
+BE --> X1
+BE --> X2
+BE .[#4285F4].> G
+@enduml

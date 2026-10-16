@@ -1,0 +1,27 @@
+@startuml arch-schedule
+!include _style.iuml
+title Schedule — arhitectură
+
+actor "Studenți\nși profesori" as U
+actor "Administratori\nde facultate" as ADM
+cloud "**Google Workspace**\nOAuth (administrare)" as G
+
+rectangle "**Aplicație web**\nVue 3 + Vuetify + TypeScript\nclient API generat din OpenAPI" as FE <<app>>
+rectangle "**API Laravel 12**\nREST · OpenAPI / Swagger\nlimitare de rată" as API <<app>>
+database "MySQL ×9\n(câte o bază pe facultate)" as DB
+
+rectangle "**ULBS Connect**\nprezență, orar" as CON <<app>>
+rectangle "**Plata cu ora**\norar profesori" as PO <<app>>
+rectangle "**aSc Timetables**\nimport XML" as ASC <<external>>
+rectangle "**Stat de funcții**\nimport Excel" as STAT <<external>>
+
+U --> FE : orar public
+ADM --> FE
+FE --> API : REST
+API --> DB : alege baza după\ncodul facultății
+CON --> API : token
+PO --> API : token
+API <-- ASC
+API <-- STAT
+FE .[#4285F4].> G
+@enduml

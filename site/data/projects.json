@@ -6,7 +6,167 @@
     "starter_url": "https://github.com/code4ulbs/code4ulbs-starter",
     "org_url": "https://github.com/code4ulbs",
     "cie_url": "https://inginerie.ulbsibiu.ro/dep.cie/pages/code4ulbs",
-    "repo_url": "https://github.com/code4ulbs/code4ulbs.github.io"
+    "repo_url": "https://github.com/code4ulbs/code4ulbs.github.io",
+    "handle_names": {
+      "mcanti": "Cantemir Mihu",
+      "pitictoni": "Antoniu Pitic",
+      "PiticAntoniu": "Antoniu Pitic",
+      "myronabotanel": "Mirona Botanel",
+      "mironabotanel": "Mirona Botanel",
+      "andreea-oros": "Andreea Oros",
+      "andreeaaoros": "Andreea Oros"
+    },
+    "story": {
+      "intro": "Code4ULBS este o inițiativă comunitară a Sibiu IT Cluster, bazată pe voluntariat, pentru software dedicat ULBS. Colaborează voluntari, studenți, angajați ai universității și companii locale, cu un scop comun: modernizarea proceselor universitare prin soluții create local.",
+      "why": [
+        {
+          "title": "Resurse limitate",
+          "text": "Universitatea are nevoie de soluții IT moderne, dar resursele sunt limitate."
+        },
+        {
+          "title": "Know-how fără un scop comun",
+          "text": "Comunitatea tech din Sibiu are experiență, dar îi lipsea un proiect local comun."
+        },
+        {
+          "title": "Proiecte pentru practică",
+          "text": "Studenții au nevoie de proiecte reale pe care să își facă practica."
+        },
+        {
+          "title": "Dorința de a contribui",
+          "text": "Oamenii vor să dea ceva înapoi comunității."
+        }
+      ]
+    },
+    "timeline": [
+      {
+        "when": "Mijlocul lui 2024",
+        "text": "Ideea Code4ULBS se naște în urma discuțiilor cu facultățile, în cadrul consiliilor consultative."
+      },
+      {
+        "when": "Sfârșitul lui 2024",
+        "text": "Primele întâlniri, formarea echipei de dezvoltare și alegerea primului proiect: ULBS Connect."
+      },
+      {
+        "when": "Începutul lui 2025",
+        "text": "Demararea dezvoltării aplicației ULBS Connect."
+      },
+      {
+        "when": "Sfârșitul lui 2025",
+        "text": "Primele rezultate publice și o comunitate în creștere."
+      }
+    ],
+    "lessons": [
+      "Colaborarea dintre comunitate și universitate este posibilă.",
+      "Micile victorii contează: un deploy rapid ține echipa motivată.",
+      "Fără un „driver” nu se întâmplă nimic.",
+      "Este nevoie de interacțiune constantă; ședințele și evenimentele sunt greu de organizat cu voluntari.",
+      "Implicarea studenților este o provocare.",
+      "Voluntariatul este solicitant, dar și rewarding, iar proiectele cu voluntari nu seamănă cu cele din companii."
+    ],
+    "cta": {
+      "title": "Vrei să devii voluntar?",
+      "people": {
+        "title": "Dacă ești specialist",
+        "roles": [
+          "arhitect",
+          "programator",
+          "tester",
+          "DevOps",
+          "UI/UX designer",
+          "BA",
+          "PM"
+        ],
+        "text": "Oferă-ne timpul și skill-urile tale."
+      },
+      "orgs": {
+        "title": "Dacă reprezinți o firmă sau un ONG",
+        "text": "Avem nevoie de infrastructură, credite, subscripții sau coordonare."
+      },
+      "reward": "În schimb, primești apreciere sinceră și un impact real în comunitate.",
+      "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSfNrp0J30kTQAX_kSr-P1mWJff4jxsxuGA_wdxXUZuY6tSUvg/viewform"
+    },
+    "partners": {
+      "sibiu-it-cluster": {
+        "name": "Sibiu IT Cluster",
+        "logo": "sibiu-it-cluster-white.png",
+        "url": "https://sibiu-it.ro",
+        "group": "organizers"
+      },
+      "ulbs": {
+        "name": "Universitatea „Lucian Blaga” din Sibiu",
+        "logo": "ulbs-white.png",
+        "url": "https://www.ulbsibiu.ro",
+        "group": "organizers"
+      },
+      "gesp": {
+        "name": "gesp",
+        "logo": "gesp.png",
+        "url": null,
+        "group": "contributors"
+      },
+      "scheer-imc": {
+        "name": "Scheer IMC",
+        "logo": "scheer-imc.svg",
+        "url": "https://www.scheer-imc.com",
+        "group": "contributors"
+      },
+      "hms-networks": {
+        "name": "HMS Networks — Hardware Meets Software",
+        "logo": "hms-networks-white.svg",
+        "url": "https://www.hms-networks.com",
+        "group": "contributors"
+      },
+      "nttdata": {
+        "name": "NTT DATA",
+        "logo": "nttdata-white.svg",
+        "url": "https://ro.nttdata.com",
+        "group": "contributors"
+      },
+      "ulbs-d-school": {
+        "name": "ULBS D-School",
+        "logo": "ulbs-d-school.png",
+        "url": "https://cercetare.ulbsibiu.ro/ro/ulbs-d-school/",
+        "group": "contributors"
+      }
+    },
+    "workflow": [
+      {
+        "title": "Versionare",
+        "items": [
+          "Repository-uri Git",
+          "Ramuri și commit-uri",
+          "Pull request-uri și code review",
+          "Strategii de merge"
+        ]
+      },
+      {
+        "title": "Management de proiect",
+        "items": [
+          "Issues",
+          "Projects / Boards",
+          "Milestones și etichete",
+          "Responsabili și flux de lucru"
+        ]
+      },
+      {
+        "title": "CI/CD",
+        "items": [
+          "GitHub Actions",
+          "Teste automate",
+          "Build și deploy",
+          "Integrare cu mediile (staging, producție)"
+        ]
+      },
+      {
+        "title": "GitHub Copilot",
+        "items": [
+          "Implementarea task-urilor",
+          "Completare de cod",
+          "Documentație"
+        ]
+      }
+    ],
+    "users_connect": null
   },
   "projects": [
     {
@@ -72,17 +232,6 @@
           "Pint"
         ]
       },
-      "arch": [
-        "flowchart LR",
-        "  APP[Aplicație Expo\\nAndroid · iOS · web] -->|REST + token| API[API Laravel]",
-        "  API --> DB[(PostgreSQL)]",
-        "  API -->|proxy| SCH[Schedule API]",
-        "  API -->|profil academic| UMS[UMS]",
-        "  API -->|scraping programat| SITE[ulbsibiu.ro]",
-        "  API -->|notificări| EXPO[Expo Push]",
-        "  ADM[Panou Filament] --> API",
-        "  APP -->|Google Sign-In| G[Google]"
-      ],
       "arch_note": "Backendul Laravel este punctul unic de acces pentru aplicație: face proxy către API-ul de orar, sincronizează profilul din UMS și rulează periodic comenzi care preiau știrile și evenimentele.",
       "deployment": [
         "Backend și aplicația web sunt găzduite pe o mașină virtuală a universității; la fiecare push pe `main` un runner self-hosted actualizează codul, rulează migrările și publică build-ul web.",
@@ -123,7 +272,143 @@
           "role": "responsabil",
           "confirmed": true
         }
-      ]
+      ],
+      "contributors": [
+        {
+          "name": "Vasile Alupei",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect"
+        },
+        {
+          "name": "Cantemir Mihu",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect",
+          "handle": "mcanti"
+        },
+        {
+          "name": "George Popescu",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect",
+          "handle": "george-popescu"
+        },
+        {
+          "name": "Ioana Precup",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect"
+        },
+        {
+          "name": "Raluca Mihaela Barsan",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect"
+        },
+        {
+          "name": "Oana Deliu",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect"
+        },
+        {
+          "name": "Denisa Ionescu",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect",
+          "handle": "denisaaionescu"
+        },
+        {
+          "name": "Simina Harla",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect"
+        },
+        {
+          "name": "Emanuel Hrițuleac",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect",
+          "handle": "XManu07"
+        },
+        {
+          "name": "Timotei Cotor",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect",
+          "handle": "iguanalog"
+        },
+        {
+          "name": "Octavian Andreas Badea",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect"
+        },
+        {
+          "name": "Cristian Alexandru Maior",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect"
+        },
+        {
+          "name": "Cristian Simina",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect"
+        },
+        {
+          "name": "Andrei Sas",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect"
+        },
+        {
+          "name": "Andreea Magda",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect",
+          "handle": "AndreeaMagda"
+        },
+        {
+          "name": "Alex Fechete",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect",
+          "handle": "Alecx-FM"
+        },
+        {
+          "name": "Mircea Blaga",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect",
+          "handle": "mirceabc"
+        },
+        {
+          "name": "Mircea Matei",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect",
+          "handle": "MircaSalvatorul"
+        },
+        {
+          "name": "Răzvan Bela",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect",
+          "handle": "razvanbela"
+        },
+        {
+          "name": "Ciprian Vanga",
+          "confirmed": true,
+          "source": "slide de mulțumiri, lansarea ULBS Connect"
+        },
+        {
+          "name": "Im-Andreas (de completat)",
+          "handle": "Im-Andreas",
+          "confirmed": false
+        },
+        {
+          "name": "CristiM",
+          "handle": "JJTecca",
+          "confirmed": false
+        },
+        {
+          "name": "Paul",
+          "handle": "pauldadarlat",
+          "confirmed": false
+        }
+      ],
+      "partners": [
+        "sibiu-it-cluster",
+        "gesp",
+        "scheer-imc",
+        "hms-networks",
+        "nttdata",
+        "ulbs-d-school"
+      ],
+      "arch_diagram": "arch-ulbs-connect"
     },
     {
       "slug": "schedule",
@@ -180,17 +465,6 @@
           "Docker Compose"
         ]
       },
-      "arch": [
-        "flowchart LR",
-        "  U[Studenți și profesori] --> FE[Aplicație Vue + Vuetify]",
-        "  ADM[Administratori] --> FE",
-        "  FE -->|REST| API[API Laravel 12]",
-        "  API --> D1[(DB facultate 1)]",
-        "  API --> D2[(DB facultate 2)]",
-        "  API --> DN[(… 9 baze de date)]",
-        "  CON[ULBS Connect] -->|API cu token| API",
-        "  PO[Plata cu ora] -->|API cu token| API"
-      ],
       "arch_note": "Arhitectură multi-bază de date: fiecare facultate are propria bază, cu o structură standardizată, iar API-ul selectează baza după codul facultății.",
       "deployment": [
         "Mediu de producție și mediu de staging administrat prin Coolify.",
@@ -222,7 +496,40 @@
           "role": "responsabil",
           "confirmed": true
         }
-      ]
+      ],
+      "contributors": [
+        {
+          "name": "Cantemir Mihu",
+          "handle": "mcanti",
+          "confirmed": false
+        },
+        {
+          "name": "alexandra-badila (de completat)",
+          "handle": "alexandra-badila",
+          "confirmed": false
+        },
+        {
+          "name": "tibyleb (de completat)",
+          "handle": "tibyleb",
+          "confirmed": false
+        },
+        {
+          "name": "Cristiana",
+          "handle": "criss2212",
+          "confirmed": false
+        },
+        {
+          "name": "L",
+          "handle": "laurentiuvirgilpopa",
+          "confirmed": false
+        },
+        {
+          "name": "LauP",
+          "handle": "LpNtt",
+          "confirmed": false
+        }
+      ],
+      "arch_diagram": "arch-schedule"
     },
     {
       "slug": "gradis",
@@ -298,16 +605,6 @@
           "Teste de performanță k6"
         ]
       },
-      "arch": [
-        "flowchart LR",
-        "  U[Profesori · secretari · validatori] --> FE[SPA Vue + Vuetify]",
-        "  FE -->|REST + sesiune| BE[Backend Spring Boot]",
-        "  BE --> DB[(PostgreSQL)]",
-        "  BE --> CR[Crossref · OpenAlex]",
-        "  BE --> WS[Web of Science · Scopus · Scholar]",
-        "  BE -->|OAuth2| G[Google]",
-        "  BE --> MCP[Server MCP]"
-      ],
       "arch_note": "Toate contribuțiile moștenesc o entitate de bază comună; punctajele sunt calculate de scripturi CEL (Common Expression Language) păstrate în baza de date, deci regulile pot fi schimbate fără redeploy.",
       "deployment": [
         "Producție pe servere ale universității: backend ca serviciu `systemd`, frontend servit de Nginx.",
@@ -354,7 +651,148 @@
           "role": "responsabil",
           "confirmed": true
         }
-      ]
+      ],
+      "contributors": [
+        {
+          "name": "Cantemir Mihu",
+          "handle": "mcanti",
+          "confirmed": false
+        },
+        {
+          "name": "Stefan",
+          "handle": "srusu",
+          "confirmed": false
+        },
+        {
+          "name": "Zoltan Horvat",
+          "handle": "Zoltan93",
+          "confirmed": false
+        },
+        {
+          "name": "Teodora Smaranda",
+          "handle": "TeodoraS99",
+          "confirmed": false
+        },
+        {
+          "name": "jeftic1986 (de completat)",
+          "handle": "jeftic1986",
+          "confirmed": false
+        },
+        {
+          "name": "Nemanja Petrovic",
+          "handle": "nemanja-ptr",
+          "confirmed": false
+        },
+        {
+          "name": "Diana Florea",
+          "handle": "DianaBalog99",
+          "confirmed": false
+        },
+        {
+          "name": "andreea-farago-qa (de completat)",
+          "handle": "andreea-farago-qa",
+          "confirmed": false
+        },
+        {
+          "name": "Răzvan Bielz",
+          "handle": "darkresq14",
+          "confirmed": false
+        },
+        {
+          "name": "DusanAtanackovic (de completat)",
+          "handle": "DusanAtanackovic",
+          "confirmed": false
+        },
+        {
+          "name": "alexandra-badila (de completat)",
+          "handle": "alexandra-badila",
+          "confirmed": false
+        },
+        {
+          "name": "avram66 (de completat)",
+          "handle": "avram66",
+          "confirmed": false
+        },
+        {
+          "name": "Cata",
+          "handle": "CataJohn",
+          "confirmed": false
+        },
+        {
+          "name": "Nikola Ivkov",
+          "handle": "ivkovnikola",
+          "confirmed": false
+        },
+        {
+          "name": "boris-mitrovic-ntt (de completat)",
+          "handle": "boris-mitrovic-ntt",
+          "confirmed": false
+        },
+        {
+          "name": "Tanja Tasevski",
+          "handle": "tanja035",
+          "confirmed": false
+        },
+        {
+          "name": "Florin Ancuta",
+          "handle": "achebv",
+          "confirmed": false
+        },
+        {
+          "name": "natalija-jerinic (de completat)",
+          "handle": "natalija-jerinic",
+          "confirmed": false
+        },
+        {
+          "name": "iamiva7 (de completat)",
+          "handle": "iamiva7",
+          "confirmed": false
+        },
+        {
+          "name": "jordankusic (de completat)",
+          "handle": "jordankusic",
+          "confirmed": false
+        },
+        {
+          "name": "cristian-stoisor-iaggbs (de completat)",
+          "handle": "cristian-stoisor-iaggbs",
+          "confirmed": false
+        },
+        {
+          "name": "Tudor-Stefan Ivancea",
+          "handle": "tudorriva",
+          "confirmed": false
+        },
+        {
+          "name": "Zoltan-Ntt (de completat)",
+          "handle": "Zoltan-Ntt",
+          "confirmed": false
+        },
+        {
+          "name": "eugenrotar (de completat)",
+          "handle": "eugenrotar",
+          "confirmed": false
+        },
+        {
+          "name": "Robert Oltean",
+          "handle": "RobertOltean314",
+          "confirmed": false
+        },
+        {
+          "name": "Antoniu Pitic",
+          "handle": "PiticAntoniu",
+          "confirmed": false
+        },
+        {
+          "name": "NttTudorBogdan (de completat)",
+          "handle": "NttTudorBogdan",
+          "confirmed": false
+        }
+      ],
+      "partners": [
+        "nttdata"
+      ],
+      "arch_diagram": "arch-gradis"
     },
     {
       "slug": "platacuora",
@@ -418,18 +856,6 @@
           "Husky"
         ]
       },
-      "arch": [
-        "flowchart LR",
-        "  U[Profesori · validatori · admini] --> FE[SPA Angular\\nnginx]",
-        "  FE -->|/api| BE[API Express]",
-        "  BE --> DB[(MongoDB)]",
-        "  BE -->|PDF| PP[Puppeteer]",
-        "  BE --> UMS[UMS proxy]",
-        "  BE --> SCH[Schedule API]",
-        "  BE --> HOL[API zile libere]",
-        "  BE --> SMTP[Email]",
-        "  BE -->|OAuth| G[Google]"
-      ],
       "arch_note": "Backend structurat pe rute, controllere, servicii și modele; declarația PDF se generează dintr-un șablon HTML randat de un browser headless. Clientul pentru API-ul de orar este generat din specificația OpenAPI.",
       "deployment": [
         "Producție: la push pe `main`, un runner self-hosted construiește frontendul și actualizează serverul; backendul rulează ca serviciu `systemd`.",
@@ -464,7 +890,90 @@
           "confirmed": false,
           "draft_source": "autor în docs/Project.md; top contributori git: AleChv223, Csodo-02, adita111"
         }
-      ]
+      ],
+      "contributors": [
+        {
+          "name": "AleChv223 (de completat)",
+          "handle": "AleChv223",
+          "confirmed": false
+        },
+        {
+          "name": "Bodo",
+          "handle": "Csodo-02",
+          "confirmed": false
+        },
+        {
+          "name": "Adrian Ilie Boabes",
+          "handle": "adita111",
+          "confirmed": false
+        },
+        {
+          "name": "Tudor-Stefan Ivancea",
+          "handle": "tudorriva",
+          "confirmed": false
+        },
+        {
+          "name": "MariaSavu20 (de completat)",
+          "handle": "MariaSavu20",
+          "confirmed": false
+        },
+        {
+          "name": "andreimocian9 (de completat)",
+          "handle": "andreimocian9",
+          "confirmed": false
+        },
+        {
+          "name": "alexvladu (de completat)",
+          "handle": "alexvladu",
+          "confirmed": false
+        },
+        {
+          "name": "Cantemir Mihu",
+          "handle": "mcanti",
+          "confirmed": false
+        },
+        {
+          "name": "loredana-nanu (de completat)",
+          "handle": "loredana-nanu",
+          "confirmed": false
+        },
+        {
+          "name": "norbertjv (de completat)",
+          "handle": "norbertjv",
+          "confirmed": false
+        },
+        {
+          "name": "Andreea Oros",
+          "handle": "andreeaaoros",
+          "confirmed": false
+        },
+        {
+          "name": "L",
+          "handle": "laurentiuvirgilpopa",
+          "confirmed": false
+        },
+        {
+          "name": "Otilia",
+          "handle": "OMG1120",
+          "confirmed": false
+        },
+        {
+          "name": "Steff",
+          "handle": "StefaniaBibart",
+          "confirmed": false
+        },
+        {
+          "name": "LauP",
+          "handle": "LpNtt",
+          "confirmed": false
+        },
+        {
+          "name": "iamiva7 (de completat)",
+          "handle": "iamiva7",
+          "confirmed": false
+        }
+      ],
+      "arch_diagram": "arch-platacuora"
     },
     {
       "slug": "internships",
@@ -516,13 +1025,6 @@
           "Coolify"
         ]
       },
-      "arch": [
-        "flowchart LR",
-        "  S[Studenți] & C[Companii] & D[Departament] --> FE[React + Vite]",
-        "  FE -->|REST + token| BE[API Laravel]",
-        "  BE --> DB[(PostgreSQL)]",
-        "  BE -->|OAuth2| G[Google]"
-      ],
       "arch_note": "Backend cu repository-uri pentru acces la date, servicii pentru logica de business și Form Request-uri pentru validarea intrărilor. Ciclul unei aplicații: în așteptare → interviu programat → acceptată / respinsă.",
       "deployment": [
         "Local: Docker Compose cu PostgreSQL, backend și frontend.",
@@ -544,7 +1046,45 @@
           "role": "responsabil",
           "confirmed": true
         }
-      ]
+      ],
+      "contributors": [
+        {
+          "name": "Chitu Florian Sebastian",
+          "handle": "sebiseba2022",
+          "confirmed": false
+        },
+        {
+          "name": "Alex Fechete",
+          "handle": "Alecx-FM",
+          "confirmed": false
+        },
+        {
+          "name": "Cristiana",
+          "handle": "criss2212",
+          "confirmed": false
+        },
+        {
+          "name": "Tarîta Alexandru",
+          "handle": "AlexM-058",
+          "confirmed": false
+        },
+        {
+          "name": "Horia Pop",
+          "handle": "horiciico",
+          "confirmed": false
+        },
+        {
+          "name": "Blaga Mircea",
+          "handle": "mirceabc",
+          "confirmed": false
+        },
+        {
+          "name": "Cantemir Mihu",
+          "handle": "mcanti",
+          "confirmed": false
+        }
+      ],
+      "arch_diagram": "arch-internships"
     },
     {
       "slug": "exams",
@@ -602,14 +1142,6 @@
           "ESLint"
         ]
       },
-      "arch": [
-        "flowchart LR",
-        "  U[Profesor] --> FE[React + Vite]",
-        "  FE -->|/api + cookie + CSRF| BE[FastAPI]",
-        "  BE --> DB[(PostgreSQL)]",
-        "  BE -->|OIDC| G[Google]",
-        "  OMR[Modul OMR] -.->|în curs de integrare| BE"
-      ],
       "arch_note": "Backend modular (`auth`, `exams`, `users`), cu migrări Alembic rulate automat la pornire. Modulul OMR este deocamdată independent de API.",
       "deployment": [
         "Docker Compose (PostgreSQL, backend, frontend) pentru dezvoltare și staging; staging administrat prin Coolify.",
@@ -633,7 +1165,35 @@
           "confirmed": false,
           "draft_source": "git: top contributor (95 commit-uri) — handle GitHub, nume real necunoscut"
         }
-      ]
+      ],
+      "contributors": [
+        {
+          "name": "Tarîta Alexandru",
+          "handle": "AlexM-058",
+          "confirmed": false
+        },
+        {
+          "name": "Horia Pop",
+          "handle": "horiciico",
+          "confirmed": false
+        },
+        {
+          "name": "Dogaru Radu-Nicolae",
+          "handle": "RaduToolatenow",
+          "confirmed": false
+        },
+        {
+          "name": "DenisaDumitrascu23 (de completat)",
+          "handle": "DenisaDumitrascu23",
+          "confirmed": false
+        },
+        {
+          "name": "Cantemir Mihu",
+          "handle": "mcanti",
+          "confirmed": false
+        }
+      ],
+      "arch_diagram": "arch-exams"
     },
     {
       "slug": "teme-licenta",
@@ -691,15 +1251,6 @@
           "Playwright (E2E)"
         ]
       },
-      "arch": [
-        "flowchart LR",
-        "  U[Studenți · profesori · admini] --> FE[SPA Angular\\nnginx]",
-        "  FE -->|/api| BE[API Express]",
-        "  BE --> DB[(PostgreSQL\\nPrisma)]",
-        "  BE --> UMS[UMS proxy]",
-        "  BE -->|verificare token| G[Google]",
-        "  BE --> SMTP[Email]"
-      ],
       "arch_note": "UMS este sursa de adevăr pentru statut și structura academică; catalogul de facultăți, departamente și specializări este sincronizat în baza proprie la pornire.",
       "deployment": [
         "Docker Compose pentru local, staging și producție; la staging și producție este expus doar frontendul.",
@@ -722,7 +1273,45 @@
           "role": "responsabil",
           "confirmed": true
         }
-      ]
+      ],
+      "contributors": [
+        {
+          "name": "Oboroceanu Sebastian-Ioan",
+          "handle": "Sebiobo",
+          "confirmed": false
+        },
+        {
+          "name": "Cantemir Mihu",
+          "handle": "mcanti",
+          "confirmed": false
+        },
+        {
+          "name": "Cristina Radulescu",
+          "handle": "cristinaa17",
+          "confirmed": false
+        },
+        {
+          "name": "AlexOprinca (de completat)",
+          "handle": "AlexOprinca",
+          "confirmed": false
+        },
+        {
+          "name": "VladL",
+          "handle": "Dutzu05",
+          "confirmed": false
+        },
+        {
+          "name": "Veronica Melanie",
+          "handle": "VeronicaMelanie",
+          "confirmed": false
+        },
+        {
+          "name": "Mirona Botanel",
+          "handle": "mironabotanel",
+          "confirmed": false
+        }
+      ],
+      "arch_diagram": "arch-teme-licenta"
     },
     {
       "slug": "adeverinte",
@@ -772,15 +1361,6 @@
           "Docker Compose"
         ]
       },
-      "arch": [
-        "flowchart LR",
-        "  S[Student] --> FE[Frontend static]",
-        "  FE -->|REST| API[API ASP.NET Core]",
-        "  API -->|token| G[Google]",
-        "  API --> UMS[UMS proxy]",
-        "  API --> X[Serviciu Excel / Drive]",
-        "  API --> DOC[docx → PDF]"
-      ],
       "arch_note": "API-ul servește și frontendul static în modul de dezvoltare; în Docker, frontendul rulează în propriul container nginx.",
       "deployment": [
         "Docker Compose cu servicii separate pentru API, frontend și serviciul auxiliar pentru Excel.",
@@ -803,7 +1383,40 @@
           "confirmed": false,
           "draft_source": "git: top contributor (53 commit-uri) — handle GitHub, nume real necunoscut"
         }
-      ]
+      ],
+      "contributors": [
+        {
+          "name": "VladL",
+          "handle": "Dutzu05",
+          "confirmed": false
+        },
+        {
+          "name": "AlexOprinca (de completat)",
+          "handle": "AlexOprinca",
+          "confirmed": false
+        },
+        {
+          "name": "Oboroceanu Sebastian-Ioan",
+          "handle": "Sebiobo",
+          "confirmed": false
+        },
+        {
+          "name": "Veronica Melanie",
+          "handle": "VeronicaMelanie",
+          "confirmed": false
+        },
+        {
+          "name": "Mirona Botanel",
+          "handle": "mironabotanel",
+          "confirmed": false
+        },
+        {
+          "name": "Cantemir Mihu",
+          "handle": "mcanti",
+          "confirmed": false
+        }
+      ],
+      "arch_diagram": "arch-adeverinte"
     }
   ],
   "support": [
@@ -827,7 +1440,19 @@
         "PostgreSQL 16",
         "Playwright"
       ],
-      "people": []
+      "people": [],
+      "contributors": [
+        {
+          "name": "LauP",
+          "handle": "LpNtt",
+          "confirmed": false
+        },
+        {
+          "name": "Cantemir Mihu",
+          "handle": "mcanti",
+          "confirmed": false
+        }
+      ]
     },
     {
       "slug": "ums-proxy",
@@ -845,7 +1470,14 @@
         "Node.js 20+",
         "Docker"
       ],
-      "people": []
+      "people": [],
+      "contributors": [
+        {
+          "name": "Cantemir Mihu",
+          "handle": "mcanti",
+          "confirmed": false
+        }
+      ]
     },
     {
       "slug": "site-cie",
@@ -869,7 +1501,14 @@
         "MySQL 8",
         "Docker"
       ],
-      "people": []
+      "people": [],
+      "contributors": [
+        {
+          "name": "Cantemir Mihu",
+          "handle": "mcanti",
+          "confirmed": false
+        }
+      ]
     }
   ],
   "standards": [

@@ -1,0 +1,27 @@
+@startuml arch-platacuora
+!include _style.iuml
+title Plata cu ora — arhitectură
+
+actor "Profesori · validatori\nadministratori" as U
+cloud "**Google**\nOAuth (@ulbsibiu.ro)" as G
+
+rectangle "**SPA Angular 20**\nMaterial · NgRx\nnginx" as FE <<app>>
+rectangle "**API Express 5**\nPassport · Mongoose\nrute /api" as BE <<app>>
+rectangle "**Puppeteer**\ndeclarația PDF" as PP <<app>>
+database "MongoDB 7\n(găzduit extern)" as DB
+
+rectangle "**UMS proxy**\nverificarea utilizatorilor" as PX <<infra>>
+rectangle "**Schedule API**\norar" as SCH <<app>>
+rectangle "**API zile libere**" as HOL <<external>>
+rectangle "**Email (SMTP)**\nnotificări" as MAIL <<external>>
+
+U --> FE
+FE --> BE : /api
+BE --> DB
+BE --> PP
+BE --> PX
+BE --> SCH
+BE --> HOL
+BE --> MAIL
+BE .[#4285F4].> G
+@enduml

@@ -1,0 +1,29 @@
+@startuml arch-ulbs-connect
+!include _style.iuml
+title ULBS Connect — arhitectură
+
+actor "Studenți" as U
+actor "Administratori\nde conținut" as ADM
+cloud "**Google**\nSign-In (@ulbsibiu.ro)" as G
+
+rectangle "**Aplicație Expo**\nAndroid · iOS · web\nReact Native + Redux Toolkit" as APP <<app>>
+rectangle "**Panou de administrare**\nFilament 4" as PANEL <<app>>
+rectangle "**API Laravel 11**\nSanctum · Socialite\ncomenzi programate" as API <<app>>
+database "PostgreSQL\ncozi și cache" as DB
+
+rectangle "**Schedule API**\norar, prezență" as SCH <<app>>
+rectangle "**UMS proxy**\nprofil academic" as PX <<infra>>
+rectangle "**ulbsibiu.ro**\nștiri, evenimente\n(scraping)" as SITE <<external>>
+rectangle "**Expo Push**\nnotificări" as PUSH <<external>>
+
+U --> APP
+ADM --> PANEL
+APP --> API : REST + token
+PANEL --> API
+API --> DB
+API --> SCH : proxy
+API --> PX
+API --> SITE
+API --> PUSH
+APP .[#4285F4].> G
+@enduml

@@ -1,0 +1,22 @@
+@startuml arch-adeverinte
+!include _style.iuml
+title Adeverințe — arhitectură
+
+actor "Student" as S
+cloud "**Google**\nSign-In" as G
+
+rectangle "**Frontend static**\nHTML + JavaScript\nnginx" as FE <<dev>>
+rectangle "**API ASP.NET Core**\n.NET 8 · Swagger\nOpenXML" as API <<dev>>
+rectangle "**Șabloane Word**\ndocx → PDF" as DOC <<dev>>
+rectangle "**Serviciu Excel**\n(DriveExcelApi)" as XLS <<dev>>
+rectangle "**UMS proxy**\ndatele studentului" as PX <<infra>>
+note bottom of API : fără bază de date
+
+S --> FE
+FE --> API : REST
+API --> PX
+API --> DOC
+API --> XLS
+FE .[#4285F4].> G
+API .[#4285F4].> G : verifică token
+@enduml

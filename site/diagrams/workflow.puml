@@ -1,0 +1,57 @@
+@startuml workflow
+' Fluxul de lucru Code4ULBS: de la issue la deployment, cu GitHub Copilot.
+' Se randează cu `site/diagrams/render.sh`.
+'
+' Cum se extinde: adaugă un pas ca "rectangle ... as X <<auto>> / <<partial>> / <<manual>>"
+' și leagă-l în lanț. Culorile arată cât de automatizat e pasul.
+
+!pragma layout smetana
+left to right direction
+
+hide stereotype
+skinparam shadowing false
+skinparam defaultFontName sans-serif
+skinparam defaultFontSize 14
+skinparam roundCorner 14
+skinparam ArrowColor #454B67
+skinparam ArrowFontColor #414755
+skinparam ArrowFontSize 11
+skinparam legendBackgroundColor #FFFFFF
+skinparam legendBorderColor #EDEDED
+skinparam rectangle {
+  FontColor #011F5B
+  BorderColor #0B2F63
+}
+skinparam rectangle<<auto>> {
+  BackgroundColor #7FCC27
+}
+skinparam rectangle<<partial>> {
+  BackgroundColor #E4F4CC
+}
+skinparam rectangle<<manual>> {
+  BackgroundColor #EDEDED
+}
+
+title Cum lucrăm: de la issue la deployment
+
+rectangle "**Issue / Task**\nnevoia, descrisă și asignată" as ISSUE <<partial>>
+rectangle "**AI Coding Agent**\nGitHub Copilot implementează" as AGENT <<auto>>
+rectangle "**Code review și testare**\nPR, verificări de CI,\nrevizuire umană" as REVIEW <<partial>>
+rectangle "**Merge**\ndupă aprobare" as MERGE <<manual>>
+rectangle "**Deployment**\nGitHub Actions → staging / producție" as DEPLOY <<auto>>
+rectangle "**Testare**\nE2E zilnic + verificare manuală" as TEST <<manual>>
+
+ISSUE --> AGENT
+AGENT --> REVIEW
+REVIEW --> MERGE
+MERGE --> DEPLOY
+DEPLOY --> TEST
+TEST ..> ISSUE : următorul issue
+
+legend right
+  <back:#7FCC27>      </back>  activitate automatizată
+  <back:#E4F4CC>      </back>  parțial automatizată
+  <back:#EDEDED>      </back>  activitate manuală
+endlegend
+
+@enduml
