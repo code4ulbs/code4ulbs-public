@@ -23,7 +23,7 @@ STATUS = {
     "staging": ("Staging", "warn"),
     "development": ("În dezvoltare", "info"),
 }
-ROLE = {"coordonator": "Coordonator (cadru didactic ULBS)", "tech-lead": "Tech lead"}
+ROLE = {"responsabil": "Responsabil", "coordonator": "Coordonator (cadru didactic ULBS)", "tech-lead": "Tech lead"}
 
 
 def e(text):
@@ -89,14 +89,15 @@ def mermaid(lines):
     return '<pre class="mermaid">' + e("\n".join(l.replace("\\n", "<br/>") for l in lines)) + "</pre>"
 
 
-def people_cell(project, role):
-    found = [p for p in people(project) if p["role"] == role]
+def people_cell(project):
+    found = people(project)
     if not found:
         return '<span class="muted">în curs de completare</span>'
     out = []
     for p in found:
+        role = "" if p["role"] == "responsabil" else f" <span class='muted'>({ROLE[p['role']]})</span>"
         mark = ' <span class="badge draft">neconfirmat</span>' if not p.get("confirmed") else ""
-        out.append(f"{e(p['name'])}{mark}")
+        out.append(f"{e(p['name'])}{role}{mark}")
     return "<br>".join(out)
 
 
@@ -127,7 +128,7 @@ def build_index(data):
     infra = "".join(f"<div class='tile'><h3>{e(x['title'])}</h3><p>{e(x['text'])}</p></div>" for x in data["infra"])
     rows = "".join(
         f"<tr><td><a href='projects/{p['slug']}.html'>{e(p['name'])}</a></td>"
-        f"<td>{people_cell(p, 'coordonator')}</td><td>{people_cell(p, 'tech-lead')}</td></tr>"
+        f"<td>{people_cell(p)}</td></tr>"
         for p in data["projects"] + data["support"]
     )
     body = f"""
@@ -144,7 +145,7 @@ def build_index(data):
   <section id="standarde"><h2>Standarde Code4ULBS</h2><p>Fiecare proiect respectă aceleași reguli, descrise în <a href="{e(s['starter_url'])}">code4ulbs-starter</a>.</p><div class="grid tiles">{stds}</div></section>
   <section><h2>Infrastructură</h2><div class="grid tiles">{infra}</div></section>
   <section id="responsabili"><h2>Cine răspunde de ce</h2>
-    <div class="table-wrap"><table><thead><tr><th>Aplicație</th><th>Coordonator</th><th>Tech lead</th></tr></thead><tbody>{rows}</tbody></table></div></section>
+    <div class="table-wrap"><table><thead><tr><th>Aplicație</th><th>Responsabili</th></tr></thead><tbody>{rows}</tbody></table></div></section>
   <section id="implica-te"><h2>Implică-te</h2>
     <p>Începe cu <a href="{e(s['starter_url'])}">code4ulbs-starter</a>: cerințe, standarde de dezvoltare și ghiduri de contribuție. Echipele comunică pe Discord, iar fiecare modificare pornește de la un issue. Mai multe informații pe <a href="{e(s['cie_url'])}">pagina Code4ULBS a Departamentului CIE</a>.</p></section>
 </main>"""
@@ -214,20 +215,32 @@ def build_project(p, data):
         )
         sec.append(f"<section><h2>Responsabili</h2><ul>{items}</ul></section>")
     else:
-        sec.append("<section><h2>Responsabili</h2><p class='muted'>Coordonatorul și responsabilul tehnic se completează în curând.</p></section>")
+        sec.append("<section><h2>Responsabili</h2><p class='muted'>Responsabilii se completează în curând.</p></section>")
     return page(f"{p['name']} — Code4ULBS", head + '<main class="wrap">' + "".join(sec) + "</main>", root)
 
 
 def check_no_unconfirmed(data):
-    """Garda: în build de producție nu are voie să apară nicio persoană neconfirmată."""
+    """Garda: în build de producție nu apare nicio persoană neconfirmată.
+
+    - pe pagina unui proiect nu are voie să apară numele unei persoane neconfirmate pentru acel proiect
+      (decât dacă persoana e confirmată pe același proiect);
+    - pe pagina principală nu apar nume care nu sunt confirmate nicăieri.
+    """
     if DRAFT:
         return
-    bad = [x["name"] for p in data["projects"] + data["support"] for x in p.get("people", []) if not x.get("confirmed")]
-    for f in DIST.rglob("*.html"):
-        txt = f.read_text(encoding="utf-8")
-        for name in bad:
-            if name in txt:
-                sys.exit(f"EROARE: persoana neconfirmată „{name}” apare în {f}")
+    projects = data["projects"] + data["support"]
+    confirmed_all = {x["name"] for p in projects for x in p.get("people", []) if x.get("confirmed")}
+    unconfirmed_all = {x["name"] for p in projects for x in p.get("people", []) if not x.get("confirmed")}
+    index = (DIST / "index.html").read_text(encoding="utf-8")
+    for name in unconfirmed_all - confirmed_all:
+        if name in index:
+            sys.exit(f"EROARE: persoana neconfirmată „{name}” apare în index.html")
+    for p in projects:
+        ok = {x["name"] for x in p.get("people", []) if x.get("confirmed")}
+        txt = (DIST / "projects" / f"{p['slug']}.html").read_text(encoding="utf-8")
+        for x in p.get("people", []):
+            if not x.get("confirmed") and x["name"] not in ok and x["name"] in txt:
+                sys.exit(f"EROARE: persoana neconfirmată „{x['name']}” apare în projects/{p['slug']}.html")
 
 
 def main():

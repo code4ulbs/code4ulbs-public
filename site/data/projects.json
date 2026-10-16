@@ -131,9 +131,8 @@
       "people": [
         {
           "name": "Cantemir Mihu",
-          "role": "tech-lead",
-          "confirmed": false,
-          "draft_source": "git: mcanti, 333 commit-uri"
+          "role": "responsabil",
+          "confirmed": true
         }
       ]
     },
@@ -231,9 +230,8 @@
       "people": [
         {
           "name": "Cantemir Mihu",
-          "role": "tech-lead",
-          "confirmed": false,
-          "draft_source": "git: mcanti, 725 commit-uri"
+          "role": "responsabil",
+          "confirmed": true
         }
       ]
     },
@@ -363,10 +361,9 @@
       ],
       "people": [
         {
-          "name": "Cantemir Mihu",
-          "role": "tech-lead",
-          "confirmed": false,
-          "draft_source": "git: mcanti, ~1000 commit-uri în backend + frontend"
+          "name": "Antoniu Pitic",
+          "role": "responsabil",
+          "confirmed": true
         }
       ]
     },
@@ -554,10 +551,9 @@
       "screenshots": [],
       "people": [
         {
-          "name": "sebiseba2022",
-          "role": "tech-lead",
-          "confirmed": false,
-          "draft_source": "git: top contributor (110 commit-uri) — handle GitHub, nume real necunoscut"
+          "name": "George Bontas",
+          "role": "responsabil",
+          "confirmed": true
         }
       ]
     },
@@ -733,10 +729,9 @@
       "screenshots": [],
       "people": [
         {
-          "name": "Sebiobo",
-          "role": "tech-lead",
-          "confirmed": false,
-          "draft_source": "git: top contributor (82 commit-uri) — handle GitHub, nume real necunoscut"
+          "name": "Constin Constantinescu",
+          "role": "responsabil",
+          "confirmed": true
         }
       ]
     },
