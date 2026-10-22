@@ -164,3 +164,5 @@ td { padding: 10px 12px; border-bottom: 1px solid var(--ulbs-border); vertical-a
 /* Diagrame de arhitectură pe paginile aplicațiilor (în coloana de text, fără „breakout”) */
 .diagram.app { width: 100%; left: 0; transform: none; }
 .diagram.app img { min-width: 600px; width: auto; max-width: 100%; margin: 0 auto; }
+
+s.deprecated { text-decoration: line-through; text-decoration-thickness: 2px; opacity: .7; }

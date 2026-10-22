@@ -75,6 +75,12 @@ def partner_logo(pid, partners, root):
     return f'<span class="logo" title="{e(pt["name"])}">{img}</span>'
 
 
+def pname(project):
+    """Numele proiectului; tăiat (strike-through) dacă e deprecated."""
+    name = e(project["name"])
+    return f'<s class="deprecated">{name}</s>' if project.get("status") == "deprecated" else name
+
+
 def status_badge(status):
     label, cls = STATUS[status]
     return f'<span class="badge {cls}">{label}</span>'
@@ -141,7 +147,7 @@ def card(p, root):
             stack.extend(group[:2])
     chips = "".join(f'<span class="chip">{e(s)}</span>' for s in stack[:5])
     return f"""<a class="card" href="{root}projects/{p['slug']}.html">
-  <div class="card-top"><h3>{e(p['name'])}</h3>{status_badge(p['status'])}</div>
+  <div class="card-top"><h3>{pname(p)}</h3>{status_badge(p['status'])}</div>
   <p>{e(p['tagline'])}</p>
   <div class="chips">{chips}</div>
 </a>"""
@@ -154,7 +160,7 @@ def build_index(data):
     stds = "".join(f"<div class='tile'><h3>{e(x['title'])}</h3><p>{e(x['text'])}</p></div>" for x in data["standards"])
     infra = "".join(f"<div class='tile'><h3>{e(x['title'])}</h3><p>{e(x['text'])}</p></div>" for x in data["infra"])
     rows = "".join(
-        f"<tr><td><a href='projects/{p['slug']}.html'>{e(p['name'])}</a></td>"
+        f"<tr><td><a href='projects/{p['slug']}.html'>{pname(p)}</a></td>"
         f"<td>{people_cell(p)}</td></tr>"
         for p in data["projects"] + data["support"]
     )
@@ -245,7 +251,7 @@ def build_project(p, data):
         links.append(f'<span class="chip">repo: code4ulbs/{e(r["name"])}{priv}</span>')
     head = f"""<section class="hero small"><div class="wrap">
   <p class="crumb"><a href="../index.html#proiecte">← Toate proiectele</a></p>
-  <h1>{e(p['name'])}</h1><p class="lead">{e(p['tagline'])}</p>
+  <h1>{pname(p)}</h1><p class="lead">{e(p['tagline'])}</p>
   <div class="meta">{''.join(meta)}</div><div class="meta">{''.join(links)}</div>
 </div></section>"""
     sec.append(f"<section><h2>Descriere</h2><p>{md(p['description'])}</p></section>")
@@ -313,7 +319,7 @@ def build_project(p, data):
             + "</li>"
             for c in cons
         )
-        sec.append(f"<section><h2>Contributori</h2><p>Mulțumim tuturor celor care au contribuit la {e(p['name'])}.</p><ul class='contributors'>{chips}</ul></section>")
+        sec.append(f"<section><h2>Contributori</h2><p>Mulțumim tuturor celor care au contribuit la {pname(p)}.</p><ul class='contributors'>{chips}</ul></section>")
     else:
         sec.append("<section><h2>Contributori</h2><p class='muted'>Lista contributorilor se completează în curând.</p></section>")
     return page(f"{p['name']} — Code4ULBS", head + '<main class="wrap">' + "".join(sec) + "</main>", root)
