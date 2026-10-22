@@ -22,6 +22,7 @@ STATUS = {
     "production": ("În producție", "ok"),
     "staging": ("Staging", "warn"),
     "development": ("În dezvoltare", "info"),
+    "deprecated": ("Deprecated", "muted"),
 }
 ROLE = {"responsabil": "Responsabil", "coordonator": "Coordonator (cadru didactic ULBS)", "tech-lead": "Tech lead"}
 

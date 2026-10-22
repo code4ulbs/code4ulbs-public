@@ -885,6 +885,11 @@
       ],
       "people": [
         {
+          "name": "Macarie Breazu",
+          "role": "responsabil",
+          "confirmed": true
+        },
+        {
           "name": "Cantemir Mihu",
           "role": "tech-lead",
           "confirmed": false,
@@ -1314,10 +1319,27 @@
       "arch_diagram": "arch-teme-licenta"
     },
     {
+      "slug": "tursib",
+      "name": "Tursib",
+      "tagline": "Proiect în dezvoltare — detalii în curând",
+      "description": "Momentan nu sunt mai multe detalii despre acest proiect.",
+      "status": "development",
+      "url": null,
+      "repos": [],
+      "people": [
+        {
+          "name": "Radu Chis",
+          "role": "responsabil",
+          "confirmed": true
+        }
+      ],
+      "contributors": []
+    },
+    {
       "slug": "adeverinte",
       "name": "Adeverințe",
       "tagline": "Adeverințe de student generate și verificabile",
-      "status": "development",
+      "status": "deprecated",
       "url": null,
       "repos": [
         {

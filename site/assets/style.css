@@ -80,8 +80,9 @@ main li { margin: 4px 0; }
 .badge.ok { background: #E4F4CC; color: #2B5A00; }
 .badge.warn { background: #FDEBC8; color: #7A4B00; }
 .badge.info { background: #DCEBFF; color: #0B2F63; }
+.badge.muted { background: #E6E6E6; color: #4A4A4A; }
 .badge.draft { background: #FBD5DA; color: #900E36; }
-.hero .badge.ok, .hero .badge.warn, .hero .badge.info { border: 1px solid rgba(255,255,255,.4); }
+.hero .badge.ok, .hero .badge.warn, .hero .badge.info, .hero .badge.muted { border: 1px solid rgba(255,255,255,.4); }
 .btn { background: #fff; color: var(--ulbs-dark-navy); font-weight: 700; text-decoration: none; padding: 6px 16px; border-radius: 6px; }
 .btn:hover { background: var(--ulbs-bg-hover); color: var(--ulbs-very-dark-navy); }
 
