@@ -246,6 +246,8 @@ def build_project(p, data):
     links = []
     if p.get("url"):
         links.append(f'<a class="btn" href="{e(p["url"])}">Deschide aplicația</a>')
+    if p.get("staging_url"):
+        links.append(f'<a class="btn ghost" href="{e(p["staging_url"])}">Staging</a>')
     for r in p.get("repos", []):
         priv = " (privat)" if r.get("private") else ""
         links.append(f'<span class="chip">repo: code4ulbs/{e(r["name"])}{priv}</span>')

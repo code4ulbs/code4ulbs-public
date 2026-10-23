@@ -24,7 +24,7 @@ DATA = Path(__file__).resolve().parent.parent / "data" / "projects.json"
 REPOS = {
     "ulbs-connect": ["code4ulbs/ulbs-connect-frontend", "code4ulbs/ulbs-connect-backend"],
     "schedule": ["code4ulbs/schedule"],
-    "gradis": ["code4ulbs/gradis-backend", "code4ulbs/gradis-frontend", "code4ulbs/gradis-tools"],
+    "gradis": ["code4ulbs/gradis", "code4ulbs/gradis-tools"],
     "platacuora": ["code4ulbs/platacuora"],
     "internships": ["code4ulbs/internships"],
     "exams": ["code4ulbs/exams"],

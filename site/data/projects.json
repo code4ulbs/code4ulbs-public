@@ -538,13 +538,10 @@
       "status": "production",
       "version": "1.0.0",
       "url": "https://gradis.ulbsibiu.ro",
+      "staging_url": "https://gradis.staging.ulbsibiu.ro",
       "repos": [
         {
-          "name": "gradis-backend",
-          "private": true
-        },
-        {
-          "name": "gradis-frontend",
+          "name": "gradis",
           "private": true
         },
         {
@@ -608,7 +605,7 @@
       "arch_note": "Toate contribuțiile moștenesc o entitate de bază comună; punctajele sunt calculate de scripturi CEL (Common Expression Language) păstrate în baza de date, deci regulile pot fi schimbate fără redeploy.",
       "deployment": [
         "Producție pe servere ale universității: backend ca serviciu `systemd`, frontend servit de Nginx.",
-        "Mediu de staging separat; pipeline-uri GitHub Actions rulează testele, construiesc artefactul și reîncarcă serviciul.",
+        "Mediu de staging separat (gradis.staging.ulbsibiu.ro, administrat prin Coolify); pipeline-uri GitHub Actions rulează testele, construiesc artefactul și reîncarcă serviciul.",
         "Backup automat al bazei de date de două ori pe zi, cu retenție de 30 de zile.",
         "Teste E2E zilnice și teste de performanță săptămânale."
       ],
@@ -621,7 +618,7 @@
       "run_local": [
         "Bază de date: `cd backend`, `docker compose -f db-compose.yaml up -d`",
         "Backend: `./gradlew bootRun` (port 8080)",
-        "Frontend: `cd frontend/gradis-frontend-vuejs`, `npm install`, `npm run dev` (port 3000)"
+        "Frontend: `cd frontend`, `npm install`, `npm run dev` (port 5173)"
       ],
       "screenshots": [
         {
@@ -801,6 +798,7 @@
       "status": "production",
       "version": "1.0.0",
       "url": "https://platacuora.ulbsibiu.ro",
+      "staging_url": "https://plata-cu-ora.staging.ulbsibiu.ro",
       "repos": [
         {
           "name": "platacuora",
@@ -859,7 +857,7 @@
       "arch_note": "Backend structurat pe rute, controllere, servicii și modele; declarația PDF se generează dintr-un șablon HTML randat de un browser headless. Clientul pentru API-ul de orar este generat din specificația OpenAPI.",
       "deployment": [
         "Producție: la push pe `main`, un runner self-hosted construiește frontendul și actualizează serverul; backendul rulează ca serviciu `systemd`.",
-        "Staging: Docker Compose (MongoDB, backend, frontend cu nginx) administrat prin Coolify; doar frontendul este expus.",
+        "Staging (plata-cu-ora.staging.ulbsibiu.ro): Docker Compose (MongoDB, backend, frontend cu nginx) administrat prin Coolify; doar frontendul este expus.",
         "Backup zilnic al bazei de date, cu retenție de 7 zile.",
         "Documentație tehnică publicată cu MkDocs / Backstage TechDocs."
       ],
