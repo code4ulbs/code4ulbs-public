@@ -1,6 +1,6 @@
-# code4ulbs.github.io
+# code4ulbs-public
 
-Pagina de portofoliu [Code4ULBS](https://github.com/code4ulbs): https://code4ulbs.github.io/
+Pagina de portofoliu [Code4ULBS](https://github.com/code4ulbs): https://code4ulbs.ulbsibiu.ro/
 
 - Datele sunt în [`site/data/projects.json`](site/data/projects.json) (sursa unică de adevăr)
 - Generare locală: `python3 site/build.py --draft` (arată și persoanele neconfirmate), apoi deschide `site/dist/index.html`
